@@ -1,6 +1,33 @@
 \section{Methods}
 
 \subsection{Evolutionary Algorithms}
+\begin{algorithm}[!htbp]
+	\scriptsize
+	\caption{NOSSGA}
+	\textbf{Input:} $E$ (max. no. of evaluations), $N$ (population size), $C_r$ (crossover rate), $T$ (Tournament size)\\
+	\textbf{Output:} $P$ (A set of solutions)
+	\begin{algorithmic}[1]\label{alg:nossga}
+		\STATE{$P \gets$ initialize population with $N$ randomly generated solutions using Algorithm~\ref{alg:init_procedure}}
+		\STATE{Evaluate the objective functions of each individual in $ P $}
+		%\STATE{$Z^r \gets$ generate $N$ uniform reference points}
+		%\STATE{$t \gets 0$}
+		\WHILE{ no. of evaluated solutions $< E$}
+		\STATE{$Q \gets$ create offspring population of size $N$ by applying crossover and mutation on $P$}  
+		\STATE{Evaluate the objective functions of each solution in $ Q $}
+		\STATE{$ R \gets P \cup Q$}
+		\STATE{For each solution in $ R $, calculate the summation of normalized objective values}
+		\STATE{Sort the members of $ R $ in ascending order according to the normalized objectives' sum}
+		\STATE{Empty $P$}
+		\FOR{$i \leftarrow 1$ to $N$}	\label{mainLoop}	
+			\STATE{Add the $i^{th}$ solution of $R$ to $P$ and remove it from $R$ if its normalized objectives' sum is greater than the previously added solutions}		
+		\ENDFOR	
+		\STATE{For each remaining solution in $ R $, calculate the crowding distance}
+		\STATE{Sort the members of $ R $ according in descending order according to the crowding distance}
+		\STATE{Fill-up the remaining solutions for $P$ from the top of $R$}
+
+		\ENDWHILE
+	\end{algorithmic}
+\end{algorithm}
 \subsection{Solution Initialization}
 \subsection{Crossover}
 \subsection{Mutation}
