@@ -18,7 +18,8 @@
 				\STATE{$S_2 \gets$ pick a solution using random selection}
 				\STATE{Generate an offspring by applying crossover on $S_1, S_2$, then mutate the offspring and add the resultant solution to $Q$}		
 			\ENDFOR	
-			%\STATE{$Q \gets$ create offspring population of size $N$ by applying crossover and mutation on $P$}  
+			%\STATE{$Q \gets$ create offspring population of size $N$ by applying crossover and mutation on $P$} 
+ 
 			\STATE{Evaluate the objective functions of each solution in $ Q $}
 			\STATE{$ R \gets P \cup Q$}
 			\STATE{For each solution in $ R $, calculate the summation of normalized objective values}
