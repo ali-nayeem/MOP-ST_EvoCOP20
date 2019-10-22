@@ -2,47 +2,45 @@ This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: splncs04.bst
-I found no \citation commands---while reading file main.aux
 Database file #1: main_bib.bib
-You've used 0 entries,
+You've used 1 entry,
             2850 wiz_defined-function locations,
-            594 strings with 4478 characters,
-and the built_in function-call counts, 24 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 7
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+            600 strings with 4675 characters,
+and the built_in function-call counts, 547 in all, are:
+= -- 43
+> -- 7
+< -- 2
++ -- 3
+- -- 2
+* -- 32
+:= -- 70
+add.period$ -- 1
+call.type$ -- 1
+change.case$ -- 4
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+cite$ -- 1
+duplicate$ -- 53
+empty$ -- 52
+format.name$ -- 2
+if$ -- 120
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 6
-num.names$ -- 0
-pop$ -- 0
+int.to.str$ -- 1
+missing$ -- 9
+newline$ -- 9
+num.names$ -- 2
+pop$ -- 13
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 3
 quote$ -- 0
-skip$ -- 1
+skip$ -- 20
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 33
+swap$ -- 35
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
+type$ -- 4
 warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 5
-(There was 1 error message)
+while$ -- 5
+width$ -- 2
+write$ -- 15

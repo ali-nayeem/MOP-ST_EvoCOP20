@@ -1,6 +1,11 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{felix2015phylogenetics}
+Felix, B.: Phylogenetics: Tracing the evolutionary legacy of organisms
+  metastatic clones bioactive compounds and languages. Journal of Phylogenetics
+  \& Evolutionary Biology  \textbf{3}(2), ~1000 (2015)
 
 \end{thebibliography}
