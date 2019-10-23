@@ -1,11 +1,57 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{deb2002fast}
+Deb, K., Pratap, A., Agarwal, S., Meyarivan, T.: A fast and elitist
+  multiobjective genetic algorithm: Nsga-ii. IEEE transactions on evolutionary
+  computation  \textbf{6}(2),  182--197 (2002)
 
 \bibitem{felix2015phylogenetics}
 Felix, B.: Phylogenetics: Tracing the evolutionary legacy of organisms
   metastatic clones bioactive compounds and languages. Journal of Phylogenetics
   \& Evolutionary Biology  \textbf{3}(2), ~1000 (2015)
+
+\bibitem{huelsenbeck1996combining}
+Huelsenbeck, J.P., Bull, J.J., Cunningham, C.W.: Combining data in phylogenetic
+  analysis. Trends in Ecology \& Evolution  \textbf{11}(4),  152--158 (1996)
+
+\bibitem{jarvis2014whole}
+Jarvis, E.D., Mirarab, S., Aberer, A.J., Li, B., Houde, P., Li, C., Ho, S.Y.,
+  Faircloth, B.C., Nabholz, B., Howard, J.T., et~al.: Whole-genome analyses
+  resolve early branches in the tree of life of modern birds. Science
+  \textbf{346}(6215),  1320--1331 (2014)
+
+\bibitem{liu2011estimating}
+Liu, L., Yu, L.: Estimating species trees from unrooted gene trees. Systematic
+  biology  \textbf{60}(5),  661--667 (2011)
+
+\bibitem{liu2010maximum}
+Liu, L., Yu, L., Edwards, S.V.: A maximum pseudo-likelihood approach for
+  estimating species trees under the coalescent model. BMC evolutionary biology
+   \textbf{10}(1), ~302 (2010)
+
+\bibitem{maddison1997gene}
+Maddison, W.P.: Gene trees in species trees. Systematic biology
+  \textbf{46}(3),  523--536 (1997)
+
+\bibitem{mirarab2014astral}
+Mirarab, S., Reaz, R., Bayzid, M.S., Zimmermann, T., Swenson, M.S., Warnow, T.:
+  Astral: genome-scale coalescent-based species tree estimation. Bioinformatics
+   \textbf{30}(17),  i541--i548 (2014)
+
+\bibitem{de2007supermatrix}
+de~Queiroz, A., Gatesy, J.: The supermatrix approach to systematics. Trends in
+  ecology \& evolution  \textbf{22}(1),  34--41 (2007)
+
+\bibitem{vachaspati2015astrid}
+Vachaspati, P., Warnow, T.: Astrid: accurate species trees from internode
+  distances. BMC genomics  \textbf{16}(10), ~S3 (2015)
+
+\bibitem{zwickl2014disentangling}
+Zwickl, D.J., Stein, J.C., Wing, R.A., Ware, D., Sanderson, M.J.: Disentangling
+  methodological and biological sources of gene tree discordance on oryza
+  (poaceae) chromosome 3. Systematic biology  \textbf{63}(5),  645--659 (2014)
 
 \end{thebibliography}
