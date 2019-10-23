@@ -17,6 +17,11 @@ Felix, B.: Phylogenetics: Tracing the evolutionary legacy of organisms
 Huelsenbeck, J.P., Bull, J.J., Cunningham, C.W.: Combining data in phylogenetic
   analysis. Trends in Ecology \& Evolution  \textbf{11}(4),  152--158 (1996)
 
+\bibitem{islam2019stelar}
+Islam, M., Sarker, K., Das, T., Reaz, R., Bayzid, M.S.: Stelar: A statistically
+  consistent coalescent-based species tree estimation method by maximizing
+  triplet consistency. BioRxiv p. 594911 (2019)
+
 \bibitem{jarvis2014whole}
 Jarvis, E.D., Mirarab, S., Aberer, A.J., Li, B., Houde, P., Li, C., Ho, S.Y.,
   Faircloth, B.C., Nabholz, B., Howard, J.T., et~al.: Whole-genome analyses
