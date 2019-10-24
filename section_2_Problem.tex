@@ -1,9 +1,10 @@
 \section{Problem Description}
 \label{sec:problem}
-We are given a set of rooted binary trees as a collection gene trees each having N-taxon. We need to construct the species tree, a rooted binary tree with N-taxon, from these gene trees by simultaneously optimizing the following three scoring functions:  
-\begin{enumerate}
+We are given a set of rooted binary trees as a collection gene trees each having N-taxon. We need to construct the species tree, a rooted binary tree with N-taxon, from these gene trees by simultaneously optimizing the following three objective functions:  
+\begin{enumerate}[label=Obj\arabic*.]
+		
 	\item Maximize the number of consistent quartets (i.e., unrooted 4-taxon tree) between the species tree and the gene trees (used by ASTRAL\cite{mirarab2014astral})
 	\item Maximize the number of consistent triplets (i.e., rooted 3-taxon tree) between the species tree and the gene trees (used by STELAR~\cite{islam2019stelar})
 	\item Maximize a pseudo-likelihood estimate of the species tree utilizing the underlying triplet distribution of the gene trees (used by MP-EST~\cite{liu2010maximum})
 \end{enumerate}
-Each of the above objective functions (optimized by an existing method) has some ability to predict the species tree accuracy but none of them can necessarily lead towards the most accurate species tree. Therefore, optimizing them together, by an EMO algorithm, will generate a set of candidate solutions which is expected to contain a species tree which is more accurate than the output of the existing methods.
+Each of the above functions (optimized by an existing method) has some ability to predict the species tree accuracy but none of them can necessarily lead towards the most accurate species tree. Therefore, optimizing them together, by an EMO algorithm, will generate a set of candidate solutions which is expected to contain a species tree which is more accurate than the output of the existing methods.
