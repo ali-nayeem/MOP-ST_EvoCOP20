@@ -1,0 +1,22 @@
+\section{Introduction}
+\label{sec:intro}
+% for bioinformatics community, we don't need this introduction about phylogeny; but for evocomp, we need this
+In biological studies, evolutionary relationships between a group of organisms (usually called as taxa) are referred to as phylogeny. A hypothesis regarding such history is inferred in the form of a tree popularly known as the phylogenetic tree. A forking point in a phylogenetic tree depicts a historical speciation event which split a single population into two distinct species.  Knowledge discovered through analyzing such trees has benefited several branches if science including but not limited to medicine, forensics, bio-geography, epidemiology~\cite{felix2015phylogenetics}. 
+A species tree shows the overall phylogeny of species. On the other hand, the phylogeny specific to a single region of the genome (known as locus or gene) is termed as a gene tree~\cite{maddison1997gene}. 
+
+While building a species tree from multiple genes, traditionally all gene sequence data were concatenated into one super-matrix based on the assumption that all genes have the same gene tree~\cite{huelsenbeck1996combining, de2007supermatrix}. Then the super-matrix is analyzed using some sequence based statistical approaches such as maximum likelihood. However, modern studies~\cite{zwickl2014disentangling, jarvis2014whole} show that the gene trees can be discordant with each other as well as with the species tree for various biological reasons. This observation has challenges the correctness of the traditional approach and thereby motivated the researchers to develop efficient methods to estimate species tree without concatenation. 
+
+Among the newer methods, perhaps the most popular ones belong to a family called `summary methods'. They take the gene trees estimated from the individual genes as input and then find a species tree that `best' summarize the gene trees which is an NP-hard combinatorial optimization task~\cite{mirarab2014astral}. Example of such methods includes ASTRAL~\cite{mirarab2014astral}, MP-EST~\cite{liu2010maximum}, STELAR~\cite{islam2019stelar}, NJst~\cite{liu2011estimating}, ASTRID~\cite{vachaspati2015astrid}, etc. Each of them optimize a criterion or score which has some hypothetical correlation with the species tree accuracy. 
+
+Although the summary methods are more accurate than the traditional ones, we notice a pitfall that can hinder their success. We find that no criterion alone can necessarily lead towards the actual species tree. Therefore, methods that merely optimizes one criterion may overshoot the intended species tree during its search process. This phenomenon motivate us to apply evolutionary multi-objective optimization (EMO). An EMO algorithm evolves a population (i.e., a set of candidate solutions) by simultaneously optimizes multiple criteria end eventually output the whole population. We expect that, if an appropriate EMO algorithm is employed to optimize different scores of the existing summary methods, this final population is more likely to contain better species trees than the individual outputs of the existing methods. 
+
+To the best of our knowledge, this paper takes the first initiative to improve the accuracy of estimated species tree by existing summary methods by employing EMO algorithms.  In particular, here we makes the following key
+contributions:
+
+\begin{itemize}
+	\item We pick three optimization scores from three different methods (ASTRAL, STELAR and MP-EST) to be simultaneously optimized by an EMO algorithm (Section~\ref{sec:problem}).  
+	\item We developed an NSGA-II~\cite{deb2002fast}, a popular EMO algorithm, based  framework. Also, based on obtained observations, we designed a custom genetic algorithm whose final population contains better species tree than that of the NSGA-II (Section~\ref{sec:method}). 
+	\item Finally based on three simulated datasets, we examine the operation of the two EMO algorithms and then compare their performance with three existing methods (Section~\ref{sec:experiment}). 
+\end{itemize}
+
+
