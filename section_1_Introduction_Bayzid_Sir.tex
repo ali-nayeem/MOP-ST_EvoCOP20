@@ -1,0 +1,39 @@
+\section{Introduction}
+\label{sec:intro}
+% for bioinformatics community, we don't need this introduction about phylogeny; but for evocomp, we need this
+%In biological studies, evolutionary relationships between a group of organisms (usually called as taxa) are referred to as phylogeny. A hypothesis regarding such history is inferred in the form of a tree popularly known as the phylogenetic tree. A forking point in a phylogenetic tree depicts a historical speciation event which split a single population into two distinct species.  Knowledge discovered through analyzing such trees has benefited several branches if science including but not limited to medicine, forensics, bio-geography, epidemiology~\cite{felix2015phylogenetics}. 
+A species tree represents the evolutionary relationships of a group of organisms. On the other hand, the phylogeny specific to a particular region of the genome (known as locus or gene) is termed as a gene tree~\cite{maddison1997gene}. A standard approach for species tree estimation uses multiple loci, then concatenates alignments for each locus
+into a super-matrix based on the assumption that all genes have the same gene tree topology~\cite{huelsenbeck1996combining, de2007supermatrix}, which is then used to estimate a species phylogeny. When all the genes evolve down the same tree topology,  sequence based statistical approaches such as maximum likelihood applied to the super-matrix are statistically consistent. 
+However, gene trees may differ from each other, because genes duplicate, are lost or laterally transferred, or because alleles can coexist in populations spanning several speciation events~\cite{maddison1997gene}.
+Therefore, concatenation (also known as combined analysis) can be statistically inconsistent~\cite{roch2015likelihood}, and can return incorrect trees with high confidence~\cite{kubatko-degnan-2007,edwards2007,leache-rannala,degiorgio2009}. Therefore, developing species tree estimation methods that take gene tree discordance into account has intrinsic value in phylogenomics.
+
+
+%Then the super-matrix is analyzed using some sequence based statistical approaches such as maximum likelihood. However, modern studies~\cite{zwickl2014disentangling, jarvis2014whole} show that the gene trees can be discordant with each other as well as with the species tree for various biological reasons. This observation has challenges the correctness of the traditional approach and thereby motivated the researchers to develop efficient methods to estimate species tree without concatenation. 
+
+Among the newer methods, perhaps the most popular ones belong to a family called ``summary methods''~\cite{bayzid2013naive}. They take the gene trees estimated from the individual genes as input and then find a species tree that best summarize the gene trees under various optimization criteria. 
+Because incomplete lineage sorting is
+expected to occur under many biologically realistic conditions (e.g., rapid radiations)~\cite{jarvis2014whole}, statistically consistent coalescent based species tree methods have been developed and are increasingly popular. 
+Examples of such methods include
+MP-EST~\cite{mpest}, *BEAST~\cite{heled-drummond}, NJst~\cite{njst}, BUCKy~\cite{larget-bioinf2010}, GLASS~\cite{glass}, STEM~\cite{stem}, SNAPP~\cite{snapp}, SVDquartets~\cite{svdquartet}, STEAC~\cite{steac},
+ASTRAL~\cite{mirarab2014astral}, MP-EST~\cite{liu2010maximum}, NJst~\cite{liu2011estimating}, ASTRID~\cite{vachaspati2015astrid}, STELAR~\cite{islam2019stelar}, etc. Each of them optimize a particular criterion which has been shown to be statistically consistent. For an instance, ASTRAL tries to find a species tree by maximizing the number of quartets in the gene trees that are consistent with it. The quartet-score of the ASTRAL-estimated tree is expected to converge to the quartet-score of the true tree given sufficiently large numbers of true gene trees. However, with a limited number of genes and in the presence of gene tree estimation error, existing methods may \textit{overshoot} the criterion they try to optimize, and thus may deviate from the true tree. We have observed that, in most of the cases, quartet-scores of the ASTRAL trees are more than the quartet-scores of the true trees. Similarly, MP-EST, which maximizes a pseudo-likelihood measure, tends to overestimate the amount of ILS present in the gene trees~\cite{statistical-binning}. Moreover, the performance of various optimization criteria varies with varying model conditions~\cite{mirarab2014evaluating,chou2015comparative}.
+
+Therefore, optimizing a particular optimization criterion, despite being statistically consistent, may not always produce highly accurate trees. This phenomenon motivates us to apply an evolutionary multi-objective optimization (EMO). An EMO algorithm evolves a population (i.e., a set of candidate solutions) by simultaneously optimizing multiple criteria end eventually outputs a collection of candidate solutions. 
+In this study, we focus on finding a tree-space by an EMO algorithm containing highly accurate trees under practical model conditions with limited numbers of estimated gene trees. 
+
+This is the first known study that aims to improve the accuracy of the estimated trees by multi-objective formulation. We show that if an appropriate EMO algorithm is employed to optimize different optimization criteria simultaneously, the final population is more likely to contain better species trees than the individual outputs of the existing methods. We developed an NSGA-II~\cite{deb2002fast}, a popular EMO algorithm, based framework for species tree estimation. More importantly, we designed a especially customized genetic algorithm NOSSGA (write the elaboration) whose final population contains better candidate species trees than that of the NSGA-II.  %(Section~\ref{sec:method}).
+We considered three optimization criteria: quartet consistency (ASTRAL), maximum pseudo-likelihood (MP-EST), and triplet consistency (STELAR). We assessed the validity of our approach on a collection of challenging simulated dataset. Our results suggest that NOSSGA can produce a population of candidate species trees which contain substantially more accurate trees than the trees estimated by optimizing the individual criterion. Furthermore, we explored the SPR (subtree pruning and regrafting) neighborhood of ASTRAL and MP-EST estimated trees and showed that they do not contain the highly accurate trees that can be found in the population generated by NOSSGA using multi-objective optimization.
+
+
+
+%To the best of our knowledge, this paper takes the first initiative to improve the accuracy of estimated species tree by existing summary methods by employing EMO algorithms.  In particular, here we makes the following key
+%contributions:
+
+\begin{comment}
+\begin{itemize}
+	\item We pick three optimization scores from three different methods (ASTRAL, STELAR and MP-EST) to be simultaneously optimized by an EMO algorithm (Section~\ref{sec:problem}).  
+	\item We developed an NSGA-II~\cite{deb2002fast}, a popular EMO algorithm, based  framework. Also, based on obtained observations, we designed a custom genetic algorithm whose final population contains better species tree than that of the NSGA-II (Section~\ref{sec:method}). 
+	\item Finally based on three simulated datasets, we examine the operation of the two EMO algorithms and then compare their performance with three existing methods (Section~\ref{sec:experiment}). 
+\end{itemize}
+\end{comment}
+
+

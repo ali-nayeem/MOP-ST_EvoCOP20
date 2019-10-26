@@ -3,15 +3,43 @@
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
 
+\bibitem{bayzid2013naive}
+Bayzid, M.S., Warnow, T.: Naive binning improves phylogenomic analyses.
+  Bioinformatics  \textbf{29}(18),  2277--2284 (2013)
+
+\bibitem{snapp}
+Bryant, D., Bouckaert, R., Felsenstein, J., Rosenberg, N.A., RoyChoudhury, A.:
+  Inferring species trees directly from biallelic genetic markers: bypassing
+  gene trees in a full coalescent analysis. Molecular biology and evolution
+  \textbf{29}(8),  1917--1932 (2012)
+
+\bibitem{svdquartet}
+Chifman, J., Kubatko, L.: Quartet inference from snp data under the coalescent
+  model. Bioinformatics  \textbf{30}(23),  3317--3324 (2014)
+
+\bibitem{chou2015comparative}
+Chou, J., Gupta, A., Yaduvanshi, S., Davidson, R., Nute, M., Mirarab, S.,
+  Warnow, T.: A comparative study of svdquartets and other coalescent-based
+  species tree estimation methods. BMC genomics  \textbf{16}(10), ~S2 (2015)
+
 \bibitem{deb2002fast}
 Deb, K., Pratap, A., Agarwal, S., Meyarivan, T.: A fast and elitist
   multiobjective genetic algorithm: Nsga-ii. IEEE transactions on evolutionary
   computation  \textbf{6}(2),  182--197 (2002)
 
-\bibitem{felix2015phylogenetics}
-Felix, B.: Phylogenetics: Tracing the evolutionary legacy of organisms
-  metastatic clones bioactive compounds and languages. Journal of Phylogenetics
-  \& Evolutionary Biology  \textbf{3}(2), ~1000 (2015)
+\bibitem{degiorgio2009}
+DeGiorgio, M., Degnan, J.H.: Fast and consistent estimation of species trees
+  using supermatrix rooted triples. Molecular biology and evolution
+  \textbf{27}(3),  552--569 (2009)
+
+\bibitem{edwards2007}
+Edwards, S.V., Liu, L., Pearl, D.K.: High-resolution species trees without
+  concatenation. Proceedings of the National Academy of Sciences
+  \textbf{104}(14),  5936--5941 (2007)
+
+\bibitem{heled-drummond}
+Heled, J., Drummond, A.J.: Bayesian inference of species trees from multilocus
+  data. Mol Biol Evol  \textbf{27},  570--580 (2010)
 
 \bibitem{huelsenbeck1996combining}
 Huelsenbeck, J.P., Bull, J.J., Cunningham, C.W.: Combining data in phylogenetic
@@ -28,35 +56,84 @@ Jarvis, E.D., Mirarab, S., Aberer, A.J., Li, B., Houde, P., Li, C., Ho, S.Y.,
   resolve early branches in the tree of life of modern birds. Science
   \textbf{346}(6215),  1320--1331 (2014)
 
+\bibitem{stem}
+Kubatko, L.S., Carstens, B.C., Knowles, L.L.: Stem: Species tree estimation
+  using maximum likelihood for gene trees under coalescence. Bioinf
+  \textbf{25},  971--973 (2009)
+
+\bibitem{kubatko-degnan-2007}
+Kubatko, L.S., Degnan, J.H.: Inconsistency of phylogenetic estimates from
+  concatenated data under coalescence. Syst Biol  \textbf{56}, ~17 (2007)
+
+\bibitem{larget-bioinf2010}
+Larget, B., Kotha, S.K., Dewey, C.N., An\'{e}, C.: {BUCKy}: Gene tree/species
+  tree reconciliation with the {B}ayesian concordance analysis. Bioinf
+  \textbf{26}(22),  2910--2911 (2010)
+
+\bibitem{leache-rannala}
+Leach\'{e}, A.D., Rannala, B.: The accuracy of species tree estimation under
+  simulation: a comparison of methods. Syst Biol  \textbf{60}(2),  126--137
+  (2011)
+
+\bibitem{njst}
+Liu, L., Yu, L.: {Estimating species trees from unrooted gene trees}.
+  Systematic Biology  \textbf{60}(5),  661--667 (2011).
+  \doi{10.1093/sysbio/syr027}
+
 \bibitem{liu2011estimating}
 Liu, L., Yu, L.: Estimating species trees from unrooted gene trees. Systematic
   biology  \textbf{60}(5),  661--667 (2011)
+
+\bibitem{mpest}
+Liu, L., Yu, L., Edwards, S.V.: A maximum pseudo-likelihood approach for
+  estimating species trees under the coalescent model. BMC Evolutinary Biology
+  \textbf{10:302} (2010)
 
 \bibitem{liu2010maximum}
 Liu, L., Yu, L., Edwards, S.V.: A maximum pseudo-likelihood approach for
   estimating species trees under the coalescent model. BMC evolutionary biology
    \textbf{10}(1), ~302 (2010)
 
+\bibitem{steac}
+Liu, L., Yu, L., Pearl, D.K., Edwards, S.V.: Estimating species phylogenies
+  using coalescence times among sequences. Systematic biology  \textbf{58}(5),
+  468--477 (2009)
+
 \bibitem{maddison1997gene}
 Maddison, W.P.: Gene trees in species trees. Systematic biology
   \textbf{46}(3),  523--536 (1997)
+
+\bibitem{statistical-binning}
+Mirarab, S., Bayzid, M.S., Boussau, B., Warnow, T.: Statistical binning enables
+  an accurate coalescent-based estimation of the avian tree. Science
+  \textbf{346}(6215),  1250463 (2014)
+
+\bibitem{mirarab2014evaluating}
+Mirarab, S., Bayzid, M.S., Warnow, T.: Evaluating summary methods for
+  multilocus species tree estimation in the presence of incomplete lineage
+  sorting. Systematic Biology  \textbf{65}(3),  366--380 (2014)
 
 \bibitem{mirarab2014astral}
 Mirarab, S., Reaz, R., Bayzid, M.S., Zimmermann, T., Swenson, M.S., Warnow, T.:
   Astral: genome-scale coalescent-based species tree estimation. Bioinformatics
    \textbf{30}(17),  i541--i548 (2014)
 
+\bibitem{glass}
+Mossel, E., Roch, S.: Incomplete lineage sorting: consistent phylogeny
+  estimation from multiple loci. IEEE Comp Biol Bioinform  \textbf{7}(1),
+  166--171 (2011)
+
 \bibitem{de2007supermatrix}
 de~Queiroz, A., Gatesy, J.: The supermatrix approach to systematics. Trends in
   ecology \& evolution  \textbf{22}(1),  34--41 (2007)
 
+\bibitem{roch2015likelihood}
+Roch, S., Steel, M.: Likelihood-based tree reconstruction on a concatenation of
+  aligned sequence data sets can be statistically inconsistent. Theoretical
+  population biology  \textbf{100},  56--62 (2015)
+
 \bibitem{vachaspati2015astrid}
 Vachaspati, P., Warnow, T.: Astrid: accurate species trees from internode
   distances. BMC genomics  \textbf{16}(10), ~S3 (2015)
-
-\bibitem{zwickl2014disentangling}
-Zwickl, D.J., Stein, J.C., Wing, R.A., Ware, D., Sanderson, M.J.: Disentangling
-  methodological and biological sources of gene tree discordance on oryza
-  (poaceae) chromosome 3. Systematic biology  \textbf{63}(5),  645--659 (2014)
 
 \end{thebibliography}
