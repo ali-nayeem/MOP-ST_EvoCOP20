@@ -1,8 +1,7 @@
 \section{Experimental Studies}
 \label{sec:experiment}
-\subsection{Datasets}
-
-\subsection{Comparison}
+We examine the operation of two EMO algorithms and compared their performance with three existing methods based on three previously studied simulated datasets: 10-taxon (#gene tree:200)~\cite{bayzid2015weighted}, 11-taxon (#gene tree:50) and 15-taxon (#gene tree:100)~\cite{statistical-binning}
+\subsection{NSGAII vs. NOSSGA}
 \begin{figure}[!htbp]
 	%\scriptsize
 	\centering
@@ -124,17 +123,17 @@
 	\begin{adjustwidth}{-1cm}{-1cm}
 		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Figure/10-taxon_hv}
-			\caption{NSGAII: 10-taxon}
+			\caption{10-taxon}
 			%\label{fig:con_pr06}
 		\end{subfigure}%
 		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Figure/11-taxon_hv}
-			\caption{NSGAII: 11-taxon}
+			\caption{11-taxon}
 			%\label{fig:con_pr07}
 		\end{subfigure}%
 		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Figure/15-taxon_hv}
-			\caption{NSGAII: 15-taxon}
+			\caption{15-taxon}
 			%\label{fig:con_pr09}
 		\end{subfigure}
 		\caption{Correlation between each pair of objectives as the generation of an EMO progresses. For each dataset, we average the correlation coefficient over 15 runs and 10 replicates.}
@@ -151,7 +150,7 @@
 			justified by the macro package automatically.} \label{fig1}
 	\end{adjustwidth}
 \end{figure}
-
+\subsection{Comparison with Existing Methods}
 \begin{figure}
 	\begin{adjustwidth}{0cm}{0cm}
 		\centering
