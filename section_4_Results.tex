@@ -1,7 +1,11 @@
 \section{Experimental Studies}
 \label{sec:experiment}
-We examine the operation of two EMO algorithms and compared their performance with three existing methods based on three previously studied simulated datasets: 10-taxon (#gene tree:200)~\cite{bayzid2015weighted}, 11-taxon (#gene tree:50) and 15-taxon (#gene tree:100)~\cite{statistical-binning}
+We examine the operation of two EMO algorithms and compared their performance with three existing methods based on three previously studied simulated datasets: 10-taxon (\#gene tree: 200)~\cite{bayzid2015weighted}, 11-taxon (\#gene tree: 50)~\cite{chung2011comparing} and 15-taxon (\#gene tree: 100)~\cite{statistical-binning}. Each of them has 10 replicates. We used False Negative (FN) rate~\cite{bayzid2013naive} to measure the accuracy of the estimated species tree. FN rate expresses the fraction of edges present in the true species tree but missing in the estimated tree. 
 \subsection{NSGAII vs. NOSSGA}
+To ensure a level playing field, we ran both algorithms with the same configuration (independent run: 15 , population size: 100, maximum evaluations: 10000, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
+\subsubsection{Observation:}
+
+\subsubsection{Correlation:}
 \begin{figure}[!htbp]
 	%\scriptsize
 	\centering
@@ -41,7 +45,7 @@ We examine the operation of two EMO algorithms and compared their performance wi
 	\end{adjustwidth}
 \end{figure}
 
-
+\subsubsection{Diversity:}
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -80,6 +84,7 @@ We examine the operation of two EMO algorithms and compared their performance wi
 	\end{adjustwidth}
 \end{figure}
 
+\subsubsection{Convergence:}
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -118,6 +123,7 @@ We examine the operation of two EMO algorithms and compared their performance wi
 	\end{adjustwidth}
 \end{figure}
 
+\subsubsection{Convergence:}
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -140,14 +146,12 @@ We examine the operation of two EMO algorithms and compared their performance wi
 		\label{fig:gen_wise_correlation}
 	\end{adjustwidth}
 \end{figure}
-
+\subsubsection{Accuracy:}
 \begin{figure}
 	\centering
 	\begin{adjustwidth}{-2cm}{-2cm}
 		\includegraphics[width=1.5\textwidth]{Figure/emo_boxplot}
-		\caption{A figure caption is always placed below the illustration.
-			Please note that short captions are centered, while long ones are
-			justified by the macro package automatically.} \label{fig1}
+		\caption{Accuracy of the best estimated species tree extracted from the final population of NSGAII and NOSSGA on each dataset having 10 replicate.} \label{fig:emo_compare}
 	\end{adjustwidth}
 \end{figure}
 \subsection{Comparison with Existing Methods}
@@ -155,11 +159,11 @@ We examine the operation of two EMO algorithms and compared their performance wi
 	\begin{adjustwidth}{0cm}{0cm}
 		\centering
 		\includegraphics[width=0.5\textwidth]{Figure/all_dataset_compare}
-		\caption{Comparison of ASTRAL, STELAR, MP-EST, NSGAII and NOSSGA on 3 datasets. For each dataset, the FN rates are averaged over 10 replicates.} \label{fig1}
+		\caption{Performance of ASTRAL, STELAR, MP-EST, NSGAII and NOSSGA on three datasets. For each dataset, FN rates are averaged over 10 replicates. We show the average FN rates with standard error bars over 10 replicates} \label{fig:compare_exisitng_methods}
 	\end{adjustwidth}
 \end{figure}
 
-
+%\subsection{Discussion}
 
 \begin{comment}
 \begin{figure}[!htbp]
@@ -248,4 +252,3 @@ We examine the operation of two EMO algorithms and compared their performance wi
 \subsection{Results on 15-taxon dataset}
 \end{comment}
 
-\subsection{Discussion}

@@ -3,6 +3,11 @@
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
 
+\bibitem{bayzid2015weighted}
+Bayzid, M.S., Mirarab, S., Boussau, B., Warnow, T.: Weighted statistical
+  binning: enabling statistically consistent genome-scale phylogenetic
+  analyses. PLoS One  \textbf{10}(6),  e0129183 (2015)
+
 \bibitem{bayzid2013naive}
 Bayzid, M.S., Warnow, T.: Naive binning improves phylogenomic analyses.
   Bioinformatics  \textbf{29}(18),  2277--2284 (2013)
@@ -22,10 +27,11 @@ Chou, J., Gupta, A., Yaduvanshi, S., Davidson, R., Nute, M., Mirarab, S.,
   Warnow, T.: A comparative study of svdquartets and other coalescent-based
   species tree estimation methods. BMC genomics  \textbf{16}(10), ~S2 (2015)
 
-\bibitem{deb2002fast}
-Deb, K., Pratap, A., Agarwal, S., Meyarivan, T.: A fast and elitist
-  multiobjective genetic algorithm: Nsga-ii. IEEE transactions on evolutionary
-  computation  \textbf{6}(2),  182--197 (2002)
+\bibitem{chung2011comparing}
+Chung, Y., An{\'e}, C.: Comparing two bayesian methods for gene tree/species
+  tree reconstruction: simulations with incomplete lineage sorting and
+  horizontal gene transfer. Systematic Biology  \textbf{60}(3),  261--275
+  (2011)
 
 \bibitem{degiorgio2009}
 DeGiorgio, M., Degnan, J.H.: Fast and consistent estimation of species trees
