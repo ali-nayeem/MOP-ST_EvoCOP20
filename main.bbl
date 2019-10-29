@@ -138,4 +138,9 @@ Roch, S., Steel, M.: Likelihood-based tree reconstruction on a concatenation of
 Vachaspati, P., Warnow, T.: Astrid: accurate species trees from internode
   distances. BMC genomics  \textbf{16}(10), ~S3 (2015)
 
+\bibitem{zitzler1999multiobjective}
+Zitzler, E., Thiele, L.: Multiobjective evolutionary algorithms: a comparative
+  case study and the strength pareto approach. IEEE transactions on
+  Evolutionary Computation  \textbf{3}(4),  257--271 (1999)
+
 \end{thebibliography}

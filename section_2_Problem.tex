@@ -10,5 +10,7 @@ We are given a set of $M$ rooted binary trees as a collection gene trees each ha
 	\item Maximize PL 
 		\subitem {\footnotesize PL: pseudo-likelihood estimate of the species tree utilizing the underlying triplet distribution of the gene trees (used by MP-EST~\cite{mpest})}
 \end{enumerate}
-Unlike traditional EMO, here our goal is not to approximate the Pareto front (PF). Rather, we try to design a special-purpose EMO algorithm which is able find a tree-space containing highly accurate species trees. 
+\textbf{In subsequent sections, we treat each objective into minimization by multiplying with -1}. Unlike traditional multi-objective optimizationproblems (MOPs), here our goal is not to properly approximate the Pareto front (PF). 
+%The traditional definition of convergence is may not be applicable in this problem. 
+Moreover, here a dominated solution can be better in terms of tree accuracy than a non-dominated. Therefore in this paper, we try to design a special-purpose EMO algorithm which is able find a tree-space containing highly accurate species trees. 
 %Each of the above functions (optimized by an existing method) has some ability to predict the species tree accuracy but none of them can necessarily lead towards the most accurate species tree. Therefore, optimizing them together, by an EMO algorithm, will generate a set of candidate solutions which is expected to contain a species tree which is more accurate than the output of the existing methods.

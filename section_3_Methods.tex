@@ -5,27 +5,37 @@
 	\scriptsize
 	\caption{NOSSGA}
 	\textbf{Input:} $E$ (max. no. of evaluations), $N$ (population size), $C_r$ (crossover rate), $M_r$ (mutation rate), $T$ (Tournament size)\\
-	\textbf{Output:} $P$ (A set of solutions)
+	\textbf{Output:} $P$ (A vector of $N$ solutions)
 	\begin{algorithmic}[1]\label{alg:nossga}
 		\STATE{$P \gets$ initialize population with $N$ randomly generated solutions using Algorithm~\ref{alg:init_procedure}}
-		\STATE{Evaluate the objective functions of each individual in $ P $}
+		\STATE{Evaluate the objective functions for each individual in $ P $} \COMMENT{all objectives are treated as minimization}
 		\WHILE{ no. of evaluated solutions so far $< E$}
-			\STATE{$Q \gets \emptyset$}
+			\STATE{$Q \gets \emptyset$} \COMMENT{an empty vector that can hold $N$ solutions}
 			\FOR{$i \leftarrow 1$ to $N$}	%\label{mainLoop}	
-				\STATE{$S_1 \gets$ pick a solution using tournament selection}
-				\STATE{$S_2 \gets$ pick a solution using random selection}
-				\STATE{Generate an offspring by applying crossover on $S_1, S_2$, then mutate the offspring and add the resultant solution to $Q$}		
+				\STATE{$S_1 \gets$ tournament\_selection($P$), $S_2 \gets$ random\_selection($P$)}
+				%\STATE{$S_2 \gets$ pick a solution using random selection}
+				\STATE{$Q[i] \gets$ mutation(crossover($S_1, S_2$))}
+				%\STATE{Generate an offspring by applying crossover on $S_1, S_2$, then mutate the offspring and append the resultant solution to $Q$}		
 			\ENDFOR	
-			\STATE{Evaluate the objective functions of each solution in $ Q $}
-			\STATE{$ R \gets P \cup Q$}
-			\STATE{For each solution in $ R $, calculate the summation of normalized objective values}
-			\STATE{Sort the members of $ R $ in ascending order according to the normalized objectives' sum}
-			\STATE{$P \gets \emptyset$}
-			\FOR{$i \leftarrow 1$ to $N$}	%\label{mainLoop}	
-				\STATE{Add the $i^{th}$ solution of $R$ to $P$ and remove it from $R$ if its normalized objectives' sum is greater than the previously added solutions}		
+			\STATE{Evaluate the objective functions for each solution in $ Q $}
+			\STATE{$ R \gets P \cup Q$} \COMMENT{$R$ is a vector of $2N$ solutions}
+			\STATE{For each solution $x$ in $ R $, calculate NOS($x$)}
+			\STATE{Sort the members of $ R $ in ascending order of NOS} \COMMENT{as all objectives are minimization}
+			\STATE{$P \gets \emptyset$, Append $R[1]$ to $P$, Remove $R[1]$ from $R$}
+			%\STATE{$P[1] \gets R[1]$}
+			%\STATE{$i \gets 2$}
+			\FOR{$i \leftarrow 2$ to $N$}	%\label{mainLoop}	
+				\STATE{\textbf{if} NOS($R[1]$) $\ne$ NOS(Current end of $P$), \textbf{then} Append $R[1]$ to $P$ }	
+				\STATE{Remove $R[1]$ from $R$}	
 			\ENDFOR	
+%			\FOR{$i \gets 1$ to $N$}	%\label{mainLoop}	
+%				\IF{ NOS($R[i]) \ge P[i-1]$)}
+%					\STATE{$P[i] \gets R[i]$}
+%				\ENDIF
+%				\STATE{Remove $R[i]$ from $R$}		
+%			\ENDFOR	
 			\STATE{For each remaining solution in $ R $, calculate the crowding distance}
-			\STATE{Sort the members of $ R $ according in descending order according to the crowding distance}
+			\STATE{Sort the members of $ R $  in descending order of the crowding distance}
 			\STATE{Fill-up the remaining solutions for $P$ from the top of $R$}
 		\ENDWHILE
 		\STATE{\textbf{return} $P$}

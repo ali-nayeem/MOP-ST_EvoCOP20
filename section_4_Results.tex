@@ -1,11 +1,13 @@
 \section{Experimental Studies}
 \label{sec:experiment}
-We examine the operation of two EMO algorithms and compared their performance with three existing methods based on three previously studied simulated datasets: 10-taxon (\#gene tree: 200)~\cite{bayzid2015weighted}, 11-taxon (\#gene tree: 50)~\cite{chung2011comparing} and 15-taxon (\#gene tree: 100)~\cite{statistical-binning}. Each of them has 10 replicates. We used False Negative (FN) rate~\cite{bayzid2013naive} to measure the accuracy of the estimated species tree. FN rate expresses the fraction of edges present in the true species tree but missing in the estimated tree. 
+We examine the difference in operation of NSGAII and NOSSGA and evaluate their performance with respect to three existing methods (ASTRAL, MP-EST and STELAR) based on three  simulated datasets: 10-taxon (\#gene tree: 200)~\cite{bayzid2015weighted}, 11-taxon (\#gene tree: 50)~\cite{chung2011comparing} and 15-taxon (\#gene tree: 100)~\cite{statistical-binning}. Each of them has 10 replicates (R1 to R10). We used False Negative (FN) rate~\cite{bayzid2013naive} to measure the accuracy of the estimated species tree. FN rate expresses the fraction of edges present in the true species tree but missing in the estimated tree. %previously studied
+\subsection{Observation}
 \subsection{NSGAII vs. NOSSGA}
-To ensure a level playing field, we ran both algorithms with the same configuration (independent run: 15 , population size: 100, maximum evaluations: 10000, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
-\subsubsection{Observation:}
+Here we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to know whether NOSSGA posses our desired properties. To ensure a level playing field, we ran both algorithms with the same configuration (independent run: 15 , population size: 100, maximum evaluations: 10000, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
 
-\subsubsection{Correlation:}
+
+\subsubsection{Correlation between two objectives:} We show the variation of correlation between each pair of objectives with generations for NSGAII and NOSSGA on three datasets in Fig.~\ref{fig:gen_wise_correlation}. The plotted correlation coefficients are averaged over 15 runs and 10 replicates. We see that, contrary to NSGAII, NOSSGA is able to avoid conflict between any two objectives along the whole period according to our expectation\footnote{Nayeem link it to the method section in algo}. 
+
 \begin{figure}[!htbp]
 	%\scriptsize
 	\centering
@@ -40,12 +42,15 @@ To ensure a level playing field, we ran both algorithms with the same configurat
 			\caption{NOSSGA: 15-taxon}
 			%\label{fig:con_pr09}
 		\end{subfigure}
-		\caption{Correlation between each pair of objectives as the generation of an EMO progresses. For each dataset, we average the correlation coefficient over 15 runs and 10 replicates.}
+		\caption{Variation of correlation between each pair of objectives with generations for NSGAII and NOSSGA on three datasets. 
+			%The plotted correlation coefficients are averaged over 15 runs and 10 replicates. 
+			%In each plot (algorithm: dataset), the correlation coefficient of each point are averaged over 15 runs and 10 replicates.
+		}
 		\label{fig:gen_wise_correlation}
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Diversity:}
+\subsubsection{Diversity of objectives and FN rate:}\label{subsubsec:diversity} Fig.~\ref{fig:gen_wise_std_dev} shows the variation of standard deviation of three objectives and FN rates\footnote{The knowledge of FN rate is absent to the EMOs.} in the population with generations for NSGAII and NOSSGA on three datasets. In each plot, the standard deviation values are averaged over 15 runs and 10 replicates. This figures establish that NSGAII loses diversity at early stages possibly due to discarding dominated solutions.    
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -79,12 +84,14 @@ To ensure a level playing field, we ran both algorithms with the same configurat
 			\caption{NOSSGA: 15-taxon}
 			%\label{fig:con_pr09}
 		\end{subfigure}
-		\caption{Correlation between each pair of objectives as the generation of an EMO progresses. For each dataset, we average the correlation coefficient over 15 runs and 10 replicates.}
-		\label{fig:gen_wise_correlation}
+		\caption{Variation of standard deviation of three objectives and FN rates in the population with generations for NSGAII and NOSSGA on three datasets.
+			% on three datasets. The plotted standard deviations are averaged over 15 runs and 10 replicates. 
+		}
+		\label{fig:gen_wise_std_dev}
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Convergence:}
+\subsubsection{Improvement in objectives and FN rate:} Now we observe how the best (minimum) value of three objectives and FN rate in the population improves across generations for NSGAII and NOSSGA as depicted in Fig.~\ref{fig:gen_wise_min}. NSGAII allows the objectives (except PL\footnote{To decrease the large runtime of PL calculation using MP-EST, we decreased the default iteration count}) to improve as much as possible which causes the resultant species tree to deviate from the true tree. As a result, the best FN rate of NSGAII starts to degrade after a particular generation. On the other hand, to avoid such deviation, NOSGGA restrict the objectives to improve after a certain point in time. So its FN rate continues to improve.
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -118,12 +125,14 @@ To ensure a level playing field, we ran both algorithms with the same configurat
 			\caption{NOSSGA: 15-taxon}
 			%\label{fig:con_pr09}
 		\end{subfigure}
-		\caption{Correlation between each pair of objectives as the generation of an EMO progresses. For each dataset, we average the correlation coefficient over 15 runs and 10 replicates.}
-		\label{fig:gen_wise_correlation}
+		\caption{Variation of minimum of three objectives and FN rates in the population with generations for NSGAII and NOSSGA on three datasets.
+			%The plotted minimum values are averaged over 15 runs and 10 replicates. 
+		}
+		\label{fig:gen_wise_min}
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Convergence:}
+\subsubsection{Comparison based on hypervolume:} We mentioned earlier that for the problem that we deal in this paper is different than the traditional MOPs. Importantly, the definition of convergence for MOPs is not applicable for our problem. To explore this issue, we compare NSGAII and NOSSGA (Fig.~\ref{fig:gen_wise_hv}) in terms of hypervolume (HV)~\cite{zitzler1999multiobjective} which is probably the most popular measure to evaluate the performance of an EMO. HV captures both convergence and diversity in a single real-value. For MOPs with all minimization objectives, a higher value of HV is desirable. From these results(Fig.~\ref{fig:gen_wise_hv}), it is difficult to differentiate between these two algorithms. Both of them saturate at early generation. Interestingly, according to HV, NOSSGA seems better than NSGAII. This is probably due to the loss of diversity at an early stage as we saw earlier.
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -142,16 +151,16 @@ To ensure a level playing field, we ran both algorithms with the same configurat
 			\caption{15-taxon}
 			%\label{fig:con_pr09}
 		\end{subfigure}
-		\caption{Correlation between each pair of objectives as the generation of an EMO progresses. For each dataset, we average the correlation coefficient over 15 runs and 10 replicates.}
-		\label{fig:gen_wise_correlation}
+		\caption{Variation of HV with generations of for NSGAII and NOSSGA on three datasets.}
+		\label{fig:gen_wise_hv}
 	\end{adjustwidth}
 \end{figure}
-\subsubsection{Accuracy:}
+\subsubsection{Tree accuracy:} Finally we compare NSGAII and NOSGGA in terms of the tree accuracy for 10 replicates of each dataset. So we graphically summarize the FN rate of the best trees from the final population of 15 independent runs using boxplots in Fig.~\ref{fig:emo_compare}. We observe that, NOSSGA can offer much better solutions than NSGAII in almost all cases. In some case, the two algorithm perform equally.
 \begin{figure}
 	\centering
 	\begin{adjustwidth}{-2cm}{-2cm}
 		\includegraphics[width=1.5\textwidth]{Figure/emo_boxplot}
-		\caption{Accuracy of the best estimated species tree extracted from the final population of NSGAII and NOSSGA on each dataset having 10 replicate.} \label{fig:emo_compare}
+		\caption{Accuracy of the best estimated species trees extracted from the final population of NSGAII and NOSSGA on each dataset having 10 replicate.} \label{fig:emo_compare}
 	\end{adjustwidth}
 \end{figure}
 \subsection{Comparison with Existing Methods}
@@ -159,7 +168,7 @@ To ensure a level playing field, we ran both algorithms with the same configurat
 	\begin{adjustwidth}{0cm}{0cm}
 		\centering
 		\includegraphics[width=0.5\textwidth]{Figure/all_dataset_compare}
-		\caption{Performance of ASTRAL, STELAR, MP-EST, NSGAII and NOSSGA on three datasets. For each dataset, FN rates are averaged over 10 replicates. We show the average FN rates with standard error bars over 10 replicates} \label{fig:compare_exisitng_methods}
+		\caption{Performance of ASTRAL, STELAR, MP-EST, NSGAII and NOSSGA on three datasets. We show the average FN rates with standard error bars over 10 replicates} \label{fig:compare_exisitng_methods}
 	\end{adjustwidth}
 \end{figure}
 
