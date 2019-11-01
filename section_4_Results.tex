@@ -194,9 +194,10 @@ Here we thoroughly inspect the behavioral difference between NSGAII and NOSSGA t
 \subsection{Comparison with Existing Methods}
 We evaluated the best trees offered by NSGAII and NOSSGA in comparison with the output of ASTRAL, MP-EST and STELAR. ASTRAL and MP-EST are two of the most widely used and accurate
 summary methods. 
-We ran the exact version of ASTRAL and STELAR, which are guaranteed to return the globally optimal tree. And for MP-EST, we ran with 10 random starting points and selected the species tree with the
-highest PL value. On each dataset, we ran both NSGAII and NOSSGA only for 99 generations (population size: 100, function evaluations: 10000). 
-Fig.~\ref{fig:compare_exisitng_methods} shows the average FN rates with standard error bars over 10 replicates . We find that NOSSGA offers the most accuracy. In case of 10-taxon dataset, NOSSGA can achieve nearly 4X accuracy than ASTRAL. For the rest two datasets, the accuracy improvement is around 2X compared to ASTRAL. Interestingly, NSGAII with default settings exhibits more accurate than each existing methods. NOSSGA achieves at least 1.4X accuracy improvement over NSGAII in all case. These results clearly demonstrate the benefit of formulating this problem as a MOP. 
+We ran the exact version of ASTRAL and STELAR, which are guaranteed to return the globally optimal tree. And for MP-EST, we ran with 10 random starting points and selected the species tree with the highest PL value. 
+On each dataset, we ran both NSGAII and NOSSGA only for 99 generations (population size: 100, function evaluations: 10000). 
+Fig.~\ref{fig:compare_exisitng_methods} shows the average FN rates with standard error bars over 10 replicates . We find that NOSSGA offers the most accuracy. In case of 10-taxon dataset, NOSSGA can achieve nearly 4X accuracy than ASTRAL. For the rest two datasets, the accuracy improvement is around 2X compared to ASTRAL. Interestingly, NSGAII with default settings exhibits more accurate than each existing methods. Owing to its designed characteristics, NOSSGA is able to exhibit at least 1.4X accuracy gain over NSGAII in all cases. These results clearly demonstrate the advantage of formulating this problem as a MOP. 
+
 
 
 %\subsection{Discussion}
