@@ -1,16 +1,16 @@
 \section{Problem Description}
 \label{sec:problem}
 We are given a set of $M$ rooted binary trees as a collection gene trees each having $N$-taxon. We need to construct the species tree, a rooted binary tree with $N$-taxon, from these gene trees by simultaneously optimizing the following three objective functions:  
-\begin{enumerate}[label=$F_\arabic*$:]
+\begin{enumerate}[label=$F_\arabic*$)]
 		
 	\item Maximize QT 
-	 \subitem {\footnotesize QT: number of consistent quartets (i.e., unrooted 4-taxon tree) between the species tree and the gene trees (used by ASTRAL\cite{mirarab2014astral})}
+	 \subitem {\scriptsize QT: number of consistent quartets (i.e., unrooted 4-taxon tree) between the species tree and the gene trees (used by ASTRAL\cite{mirarab2014astral})}
 	\item Maximize TP
-		\subitem {\footnotesize TP: number of consistent triplets (i.e., rooted 3-taxon tree) between the species tree and the gene trees (used by STELAR~\cite{islam2019stelar})}
+		\subitem {\scriptsize TP: number of consistent triplets (i.e., rooted 3-taxon tree) between the species tree and the gene trees (used by STELAR~\cite{islam2019stelar})}
 	\item Maximize PL 
-		\subitem {\footnotesize PL: pseudo-likelihood estimate of the species tree utilizing the underlying triplet distribution of the gene trees (used by MP-EST~\cite{mpest})}
+		\subitem {\scriptsize PL: pseudo-likelihood estimate of the species tree utilizing the underlying triplet distribution of the gene trees (used by MP-EST~\cite{mpest})}
 \end{enumerate}
-\textbf{In subsequent sections, we treat each objective as a minimization\footnote{In EMO literature, each objective is traditionally assumed as a minimization }}. Unlike traditional multi-objective optimization
+\textbf{In subsequent sections, we treat each objective as a minimization\footnote{In EMO literature, objectives are traditionally assumed as minimization}}. Unlike traditional multi-objective optimization
 problems (MOPs), here our goal is not to properly approximate the Pareto front (PF). 
 %The traditional definition of convergence is may not be applicable in this problem. 
 Moreover, here a dominated solution can be better in terms of tree accuracy than a non-dominated one. Therefore in this paper, we try to design a special-purpose EMO algorithm which is able find a tree-space containing highly accurate species trees. 
