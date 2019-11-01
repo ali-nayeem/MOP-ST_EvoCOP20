@@ -1,5 +1,9 @@
 \section{Methodology}
 \label{sec:method}
+\begin{equation}\label{eqn:nos}
+NOS(x) = \sum_{i=1}^{3} \frac{F_i(x)-z_i^{min}}{z_i^{max}-z_i^{min}}
+\end{equation}
+where $z_i^{min}$ ($z_i^{max}$) is the minimum (maximum) value of $i^{th}$ objective $F_i$ observed so far during the search process
 \subsection{Evolutionary Algorithms}
 \begin{algorithm}[!htbp]
 	\scriptsize
@@ -8,7 +12,7 @@
 	\textbf{Output:} $P$ (A vector of $N$ solutions)
 	\begin{algorithmic}[1]\label{alg:nossga}
 		\STATE{$P \gets$ initialize population with $N$ randomly generated solutions using Algorithm~\ref{alg:init_procedure}}
-		\STATE{For each solution in $ P $, evaluate the objective functions and NOS()} \COMMENT{all objectives are treated as minimization}
+		\STATE{For each solution in $ P $, evaluate the objective functions and $NOS()$} \COMMENT{all objectives are treated as minimization, $NOS()$ defined in eqn.\ref{eqn:nos}}
 		%\STATE{For each solution $x$ in $ P $, calculate NOS($x$)}
 		\WHILE{ no. of evaluated solutions so far $< E$}
 			\STATE{$Q \gets \emptyset$} \COMMENT{an empty vector that can hold $N$ solutions}
@@ -18,7 +22,7 @@
 				\STATE{$Q[i] \gets$ mutation(crossover($S_1, S_2$))}
 				%\STATE{Generate an offspring by applying crossover on $S_1, S_2$, then mutate the offspring and append the resultant solution to $Q$}		
 			\ENDFOR	
-			\STATE{For each solution in $ Q $, evaluate the objective functions and NOS() }
+			\STATE{For each solution in $ Q $, evaluate the objective functions and $NOS()$ }
 			\STATE{$ R \gets P \cup Q$} \COMMENT{$R$ is a vector of $2N$ solutions}
 			%\STATE{For each solution $x$ in $ R $, calculate NOS($x$)}
 			\STATE{Sort the members of $ R $ in ascending order of NOS} \COMMENT{as all objectives are minimization}
@@ -26,8 +30,8 @@
 			%\STATE{$P[1] \gets R[1]$}
 			%\STATE{$i \gets 2$}
 			\FOR{$i \leftarrow 2$ to $N$}	%\label{mainLoop}	
-				\STATE{\textbf{if} NOS($R[1]$) $\ne$ NOS(Current end of $P$), \textbf{then} Append $R[1]$ to $P$ }	
-				\STATE{Remove $R[1]$ from $R$}	
+				\STATE{\textbf{if} $NOS$($R[1]$) $\ne$ $NOS$(Current end of $P$), \textbf{then} Append $R[1]$ to $P$ }	
+				\STATE{Remove $R[1]$ from $R$}	\COMMENT{each element is shifted left by 1 position }
 			\ENDFOR	
 %			\FOR{$i \gets 1$ to $N$}	%\label{mainLoop}	
 %				\IF{ NOS($R[i]) \ge P[i-1]$)}
