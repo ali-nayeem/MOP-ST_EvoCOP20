@@ -1,6 +1,8 @@
 \section{Experimental Studies}
 \label{sec:experiment}
-We examine the difference in operation of NSGAII and NOSSGA and evaluate their performance with respect to three existing methods (ASTRAL, MP-EST and STELAR) based on three simulated datasets: 10-taxon (\#estimated gene tree: 200)~\cite{bayzid2015weighted}, 11-taxon (\#estimated gene tree: 50)~\cite{chung2011comparing} and 15-taxon (\#estimated gene tree: 100)~\cite{statistical-binning}. Each of them has 10 replicates (R1 to R10). We used False Negative (FN) rate~\cite{bayzid2013naive} to measure the accuracy of the estimated species tree. FN rate expresses the fraction of edges present in the true species tree but missing in the estimated tree. %previously studied
+We examine the difference in operation of NSGAII and NOSSGA and evaluate their performance with respect to three existing methods (ASTRAL, MP-EST and STELAR). ASTRAL and MP-EST are two of the most widely used and accurate summary methods~\cite{islam2019stelar}. We used three simulated datasets: 10-taxon (\#estimated gene tree: 200)~\cite{bayzid2015weighted}, 11-taxon (\#estimated gene tree: 50)~\cite{chung2011comparing} and 15-taxon (\#estimated gene tree: 100)~\cite{statistical-binning}. Each of them has 10 replicates (R1 to R10). We used False Negative (FN) rate~\cite{bayzid2013naive} to measure the accuracy of the estimated species tree. FN rate expresses the fraction of edges present in the true species tree\footnote{Provided with the dataset} but missing in the estimated tree. %previously studied
+
+We ran the exact version of ASTRAL and STELAR, which are guaranteed to return the globally optimal tree. And we ran MP-EST with 10 random starting points and selected the species tree with the highest PL value. For NSGAII and NOSSGA, we carried out 15 independent runs.  
 
 \begin{figure}
 	\begin{adjustwidth}{-4cm}{-3cm}
@@ -8,7 +10,6 @@ We examine the difference in operation of NSGAII and NOSSGA and evaluate their p
 		\includegraphics[width=1.6\textwidth]{Figure/tool_ratio}
 	\end{adjustwidth}
 		\caption{The issue of overshooting the optimization criterion beyond the true tree by existing methods. Each row shows the ratio of scores (QT/PL/TP), optimized by a particular method (ASTRAL/MP-EST/STELAR), of the true tree to that of the estimated tree by the same method.} \label{fig:tool_ratio}
-
 	
 \end{figure}
 
@@ -18,7 +19,7 @@ At first, we present an important observation that essentially motivated us to t
 
 
 \subsection{NSGAII vs. NOSSGA}
-Here we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to know whether NOSSGA posses our desired properties. To ensure a level playing field, we ran both algorithms with the same configuration (independent run: 15 , population size: 100, maximum evaluations: 10000, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
+Now we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to know whether NOSSGA posses our desired properties. We ensured a level playing ground by executing both algorithms with the same configuration (independent run: 15 , population size: 100, maximum generations: 99, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
 
 \begin{figure}[!htbp]
 	%\scriptsize
@@ -62,7 +63,7 @@ Here we thoroughly inspect the behavioral difference between NSGAII and NOSSGA t
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Correlation between two objectives:} We show the variation of correlation between each pair of objectives with generations for NSGAII and NOSSGA on three datasets in Fig.~\ref{fig:gen_wise_correlation}. The plotted correlation coefficients are averaged over 15 runs and 10 replicates. We see that, contrary to NSGAII, NOSSGA is able to avoid conflict between any two objectives along the whole period according to our expectation\footnote{Nayeem link it to the method section in algo}. 
+\subsubsection{Correlation between two objectives:} We show the variation of correlation between each pair of objectives with generations for NSGAII and NOSSGA on three datasets in Fig.~\ref{fig:gen_wise_correlation}. Here the horizontal axis represents the generations and the vertical axis represents the correlation coefficients averaged over 15 runs and 10 replicates. We see that, contrary to NSGAII, NOSSGA is able to avoid conflict between any two objectives during the whole period according to our requirement\footnote{Nayeem link it to the method section in algo}. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -104,7 +105,7 @@ Here we thoroughly inspect the behavioral difference between NSGAII and NOSSGA t
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Diversity of objectives and FN rate:}\label{subsubsec:diversity} Fig.~\ref{fig:gen_wise_std_dev} shows the variation of standard deviation of three objectives and FN rates\footnote{The knowledge of FN rate is absent to the EMOs.} in the population with generations for NSGAII and NOSSGA on three datasets. In each plot, the standard deviation values are averaged over 15 runs and 10 replicates. This figures establish that NSGAII loses diversity at early stages possibly due to discarding dominated solutions.    
+\subsubsection{Diversity of objectives and FN rate:}\label{subsubsec:diversity} Fig.~\ref{fig:gen_wise_std_dev} shows the variation of standard deviation of three objectives and FN rates\footnote{The knowledge of FN rate is absent to the EMOs.} in the population with generations for NSGAII and NOSSGA on three datasets. Along the vertical axis, we plotted the standard deviation values averaged over 15 runs and 10 replicates. This figures establish that NSGAII loses diversity at early stages possibly due to discarding dominated solutions.    
 
 
 \subsubsection{Improvement in objectives and FN rate:} Now we observe how the best (minimum) value of three objectives\footnote{we treated each objective as a minimization} and FN rate\footnote{lower is better} in the population improves across generations for NSGAII and NOSSGA as depicted in Fig.~\ref{fig:gen_wise_min}. The plotted minimum values are averaged over 15 runs and 10 replicates. NSGAII allows the objectives (except PL\footnote{To decrease the large runtime of PL calculation using MP-EST, we decreased the default iteration count}) to improve as much as possible which causes the resultant species tree to deviate from the true tree. As a result, the best FN rate of NSGAII starts to degrade after a particular generation. On the other hand, to avoid such deviation, NOSGGA restrict the objectives to improve after a certain point in time. So its FN rate continues to improve.
@@ -192,11 +193,10 @@ Here we thoroughly inspect the behavioral difference between NSGAII and NOSSGA t
 \end{figure}
 
 \subsection{Comparison with Existing Methods}
-We evaluated the best trees offered by NSGAII and NOSSGA in comparison with the output of ASTRAL, MP-EST and STELAR. ASTRAL and MP-EST are two of the most widely used and accurate
-summary methods. 
-We ran the exact version of ASTRAL and STELAR, which are guaranteed to return the globally optimal tree. And for MP-EST, we ran with 10 random starting points and selected the species tree with the highest PL value. 
+We evaluated the best trees offered by NSGAII and NOSSGA in comparison with the output of ASTRAL, MP-EST and STELAR. 
+%ASTRAL and MP-EST are two of the most widely used and accurate summary methods. We ran the exact version of ASTRAL and STELAR, which are guaranteed to return the globally optimal tree. And for MP-EST, we ran with 10 random starting points and selected the species tree with the highest PL value. 
 On each dataset, we ran both NSGAII and NOSSGA only for 99 generations (population size: 100, function evaluations: 10000). 
-Fig.~\ref{fig:compare_exisitng_methods} shows the average FN rates with standard error bars over 10 replicates . We find that NOSSGA offers the most accuracy. In case of 10-taxon dataset, NOSSGA can achieve nearly 4X accuracy than ASTRAL. For the rest two datasets, the accuracy improvement is around 2X compared to ASTRAL. Interestingly, NSGAII with default settings exhibits more accurate than each existing methods. Owing to its designed characteristics, NOSSGA is able to exhibit at least 1.4X accuracy gain over NSGAII in all cases. These results clearly demonstrate the advantage of formulating this problem as a MOP. 
+Fig.~\ref{fig:compare_exisitng_methods} shows the average FN rates with standard error bars over 10 replicates . We find that NOSSGA offers the most accuracy. In case of 10-taxon dataset, NOSSGA can achieve nearly 4X accuracy than ASTRAL. For the rest two datasets, the accuracy improvement is around 2X compared to ASTRAL. Interestingly, even basic NSGAII with default settings exhibits more accurate than each existing methods. However, if we run NSGAII for a large number of generations its accuracy may fall as we saw earlier. Owing to its designed characteristics, NOSSGA is able to exhibit at least 1.4X accuracy gain over NSGAII in all cases. These results clearly demonstrate the advantage of formulating this problem as a MOP. 
 
 
 
