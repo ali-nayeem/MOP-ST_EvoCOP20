@@ -48,6 +48,10 @@ Felix, B.: Phylogenetics: Tracing the evolutionary legacy of organisms
   metastatic clones bioactive compounds and languages. Journal of Phylogenetics
   \& Evolutionary Biology  \textbf{3}(2), ~1000 (2015)
 
+\bibitem{felsenstein2004inferring}
+Felsenstein, J., Felenstein, J.: Inferring phylogenies, vol.~2. Sinauer
+  associates Sunderland, MA (2004)
+
 \bibitem{gueguen2013bpp}
 Gu{\'e}guen, L., Gaillard, S., Boussau, B., Gouy, M., Groussin, M., Rochette,
   N.C., Bigot, T., Fournier, D., Pouyet, F., Cahais, V., et~al.: Bio++:
@@ -132,6 +136,11 @@ Mossel, E., Roch, S.: Incomplete lineage sorting: consistent phylogeny
   estimation from multiple loci. IEEE Comp Biol Bioinform  \textbf{7}(1),
   166--171 (2011)
 
+\bibitem{qu2010multi}
+Qu, B.Y., Suganthan, P.N.: Multi-objective evolutionary algorithms based on the
+  summation of normalized objectives and diversified selection. Information
+  sciences  \textbf{180}(17),  3170--3181 (2010)
+
 \bibitem{de2007supermatrix}
 de~Queiroz, A., Gatesy, J.: The supermatrix approach to systematics. Trends in
   ecology \& evolution  \textbf{22}(1),  34--41 (2007)
@@ -144,6 +153,17 @@ Roch, S., Steel, M.: Likelihood-based tree reconstruction on a concatenation of
 \bibitem{vachaspati2015astrid}
 Vachaspati, P., Warnow, T.: Astrid: accurate species trees from internode
   distances. BMC genomics  \textbf{16}(10), ~S3 (2015)
+
+\bibitem{villalobos2018memetic}
+Villalobos-Cid, M., Dorn, M., Ligabue-Braun, R., Inostroza-Ponta, M.: A memetic
+  algorithm based on an nsga-ii scheme for phylogenetic tree inference. IEEE
+  Transactions on Evolutionary Computation  (2018)
+
+\bibitem{zambrano2016mo}
+Zambrano-Vega, C., Nebro, A.J., Aldana-Montes, J.F.: Mo-phylogenetics: a
+  phylogenetic inference software tool with multi-objective evolutionary
+  metaheuristics. Methods in Ecology and Evolution  \textbf{7}(7),  800--805
+  (2016)
 
 \bibitem{zitzler1999multiobjective}
 Zitzler, E., Thiele, L.: Multiobjective evolutionary algorithms: a comparative

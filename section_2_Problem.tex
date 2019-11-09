@@ -1,8 +1,7 @@
 \section{Problem Description}
 \label{sec:problem}
 We are given a set of $M$ rooted binary trees as a collection gene trees each having $N$-taxon. We need to construct the species tree, a rooted binary tree with $N$-taxon, from these gene trees by simultaneously optimizing the following three objective functions:  
-\begin{enumerate}[label=$F_\arabic*$)]
-		
+\begin{enumerate}[label=$F_\arabic*$)]		
 	\item Maximize QT 
 	 \subitem {\scriptsize QT: number of consistent quartets (i.e., unrooted 4-taxon tree) between the species tree and the gene trees (used by ASTRAL\cite{mirarab2014astral})}
 	\item Maximize TP
@@ -10,8 +9,14 @@ We are given a set of $M$ rooted binary trees as a collection gene trees each ha
 	\item Maximize PL 
 		\subitem {\scriptsize PL: pseudo-likelihood estimate of the species tree utilizing the underlying triplet distribution of the gene trees (used by MP-EST~\cite{mpest})}
 \end{enumerate}
-\textbf{In subsequent sections, we treat each objective as a minimization\footnote{In EMO literature, objectives are traditionally assumed as minimization}}. Unlike traditional multi-objective optimization
-problems (MOPs), here our goal is not to properly approximate the Pareto front (PF). 
+\textbf{In subsequent sections, we treat each objective as a minimization\footnote{In EMO literature and frameworks, objectives are traditionally assumed as minimization}}. Unlike traditional multi-objective optimization problems (MOPs), here our goal is not only to effectively sampling the Pareto front (PF) because of the following issues:
+\begin{enumerate}[label=$I_\arabic*$]
+	\item \label{item:i1} Optimizing an objective beyond a certain limit can lead the resultant species tree deviate from the true tree (please see Section~\ref{subsec:observation})
+	%\item 
+	\item \label{item:i2} A solution that is badly dominated at an early generation can still potentially evolve into a highly accurate tree at a later generation (also reported in~\cite{qu2010multi})
+\end{enumerate}
+
+%On the other hand, PF allows degrading an objective to achieve improvement in other objectives.
 %The traditional definition of convergence is may not be applicable in this problem. 
-Moreover, here a dominated solution can be better in terms of tree accuracy than a non-dominated one. Therefore in this paper, we try to design a special-purpose EMO algorithm which is able find a tree-space containing highly accurate species trees. 
+ %Therefore in this paper, we try to design a special-purpose EMO algorithm from NSGAII by replacing which is able find a tree-space containing highly accurate species trees. 
 %Each of the above functions (optimized by an existing method) has some ability to predict the species tree accuracy but none of them can necessarily lead towards the most accurate species tree. Therefore, optimizing them together, by an EMO algorithm, will generate a set of candidate solutions which is expected to contain a species tree which is more accurate than the output of the existing methods.
