@@ -19,7 +19,7 @@ At first, we present an important observation that essentially motivated us to t
 
 
 \subsection{NSGAII vs. NOSSGA}
-Now we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to know whether NOSSGA posses our desired properties. We ensured a level playing ground by executing both algorithms with the same configuration (independent run: 15 , population size: 100, maximum generations: 99, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
+Now we closely inspect the behavioral difference between NSGAII and NOSSGA to know whether NOSSGA posses our desired properties. We ensured a level playing ground by executing both algorithms with the same configuration (independent run: 15 , population size: 100, maximum generations: 99, crossover rate: 0.3, mutation rate: 1.0). For NOSSGA, we use tournament size 10.
 
 \begin{figure}[!htbp]
 	%\scriptsize
@@ -63,7 +63,7 @@ Now we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Correlation between two objectives:} We show the variation of correlation between each pair of objectives with generations for NSGAII and NOSSGA on three datasets in Fig.~\ref{fig:gen_wise_correlation}. Here the horizontal axis represents the generations and the vertical axis represents the correlation coefficients averaged over 15 runs and 10 replicates. We see that, contrary to NSGAII, NOSSGA is able to avoid conflict between any two objectives during the whole period according to our requirement\footnote{Nayeem link it to the method section in algo}. 
+\subsubsection{Correlation between two objectives:} We show the variation of correlation between each pair of objectives with generations for NSGAII and NOSSGA on three datasets in Fig.~\ref{fig:gen_wise_correlation}. Here the horizontal axis represents the generations and the vertical axis represents the correlation coefficients averaged over 15 runs and 10 replicates. We see that, contrary to NSGAII, NOSSGA is able to avoid conflict between any two objectives during the whole period. These results manifest that NOSSGA prevents the optimization of one objective to a great extent even at the loss of some other objectives to resolve issue~\ref{item:i1}\footnote{Mentioned in Section~\ref{sec:problem}} as we discussed in Section~\ref{sec:method}). %objective to a great extent according to our requirement\footnote{Nayeem link it to the method section in algo}. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -105,10 +105,8 @@ Now we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to
 	\end{adjustwidth}
 \end{figure}
 
-\subsubsection{Diversity of objectives and FN rate:}\label{subsubsec:diversity} Fig.~\ref{fig:gen_wise_std_dev} shows the variation of standard deviation of three objectives and FN rates\footnote{The knowledge of FN rate is absent to the EMOs.} in the population with generations for NSGAII and NOSSGA on three datasets. Along the vertical axis, we plotted the standard deviation values averaged over 15 runs and 10 replicates. This figures establish that NSGAII loses diversity at early stages possibly due to discarding dominated solutions.    
+\subsubsection{Diversity of objectives and FN rate:}\label{subsubsec:diversity} Fig.~\ref{fig:gen_wise_std_dev} shows the variation of standard deviation of three objectives and FN rates\footnote{The knowledge of FN rate is absent to the EMOs.} in the population with generations for NSGAII and NOSSGA on three datasets. Along the vertical axis, we plotted the standard deviation values averaged over 15 runs and 10 replicates. This figures clearly show that NSGAII loses diversity at early stages possibly due to discarding badly dominated solutions (resulting in issue~\ref{item:i2}).    
 
-
-\subsubsection{Improvement in objectives and FN rate:} Now we observe how the best (minimum) value of three objectives\footnote{we treated each objective as a minimization} and FN rate\footnote{lower is better} in the population improves across generations for NSGAII and NOSSGA as depicted in Fig.~\ref{fig:gen_wise_min}. The plotted minimum values are averaged over 15 runs and 10 replicates. NSGAII allows the objectives (except PL\footnote{To decrease the large runtime of PL calculation using MP-EST, we decreased the default iteration count}) to improve as much as possible which causes the resultant species tree to deviate from the true tree. As a result, the best FN rate of NSGAII starts to degrade after a particular generation. On the other hand, to avoid such deviation, NOSGGA restrict the objectives to improve after a certain point in time. So its FN rate continues to improve.
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -149,6 +147,8 @@ Now we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to
 	\end{adjustwidth}
 \end{figure}
 
+\subsubsection{Improvement in objectives and FN rate:} Now we observe how the best (minimum) value of three objectives\footnote{we treated each objective as a minimization} and FN rate\footnote{lower is better} in the population improves across generations for NSGAII and NOSSGA as depicted in Fig.~\ref{fig:gen_wise_min}. The plotted minimum values are averaged over 15 runs and 10 replicates. NSGAII allows one or more objectives to improve as much as possible which causes the resultant species tree to deviate from the true tree (issue~\ref{item:i1}). As a result, the best FN rate of NSGAII starts to degrade after a particular generation. On the other hand, to avoid such deviation, NOSGGA restricts the improvement of one or more objectives after a certain generation. So its FN rate continues to improve. %(except PL\footnote{To decrease the large runtime of PL calculation using MP-EST, we decreased the default iteration count})
+
 \begin{figure}[!htbp]
 	\centering
 	\begin{adjustwidth}{-1cm}{-1cm}
@@ -171,7 +171,8 @@ Now we thoroughly inspect the behavioral difference between NSGAII and NOSSGA to
 		\label{fig:gen_wise_hv}
 	\end{adjustwidth}
 \end{figure}
-\subsubsection{Comparison based on hypervolume:} We mentioned earlier that for the problem that we deal in this paper is different than the traditional MOPs. Importantly, the definition of convergence for MOPs is not applicable for our problem. To explore this issue, we compare NSGAII and NOSSGA in terms of hypervolume (HV)~\cite{zitzler1999multiobjective} which is probably the most popular measure to evaluate the performance of an EMO. HV captures both convergence and diversity in a single real-value. For MOPs with all minimization objectives, a higher value of HV is desirable. In Fig.~\ref{fig:gen_wise_hv}, we plot the HV values averaged over 15 runs and 10 replicates. From these results, it is difficult to differentiate between these two algorithms. Both of their HV values get saturated at early generation. Interestingly, according to HV, NOSSGA seems better than NSGAII. This is probably due to the loss of diversity at an early stage as we saw earlier. 
+
+\subsubsection{Comparison based on hypervolume:} We mentioned earlier that for the problem that we deal in this paper is different than the traditional MOPs. Importantly, the definition of convergence for MOPs is not exactly same as the convergence in the context of our problem. To explore this issue, we compare NSGAII and NOSSGA in terms of hypervolume (HV)~\cite{zitzler1999multiobjective} which is probably the most popular measure to evaluate the performance of an EMO. HV captures both convergence and diversity in a single real-value. For MOPs with all minimization objectives, a higher value of HV is desirable. In Fig.~\ref{fig:gen_wise_hv}, we plot the HV values averaged over 15 runs and 10 replicates. From these results, it is difficult to differentiate between these two algorithms. Both of their HV values get saturated at early generation. Interestingly, according to HV, NOSSGA seems better than NSGAII. This is probably due to the loss of diversity at an early stage as we saw earlier. 
 
 \subsubsection{Tree accuracy:} Finally we compare NSGAII and NOSGGA in terms of the tree accuracy for 10 replicates of each dataset. So we graphically summarize the FN rate (a lower value means more accurate) of the best trees from the final population of 15 independent runs using boxplots in Fig.~\ref{fig:emo_compare}. We observe that, NOSSGA can offer much better solutions than NSGAII in almost all cases. In some cases, the two algorithm perform equally.
 \begin{figure}

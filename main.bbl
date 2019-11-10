@@ -33,6 +33,11 @@ Chung, Y., An{\'e}, C.: Comparing two bayesian methods for gene tree/species
   horizontal gene transfer. Systematic Biology  \textbf{60}(3),  261--275
   (2011)
 
+\bibitem{deb2002fast}
+Deb, K., Pratap, A., Agarwal, S., Meyarivan, T.: A fast and elitist
+  multiobjective genetic algorithm: Nsga-ii. IEEE transactions on evolutionary
+  computation  \textbf{6}(2),  182--197 (2002)
+
 \bibitem{degiorgio2009}
 DeGiorgio, M., Degnan, J.H.: Fast and consistent estimation of species trees
   using supermatrix rooted triples. Molecular biology and evolution
@@ -51,6 +56,11 @@ Felix, B.: Phylogenetics: Tracing the evolutionary legacy of organisms
 \bibitem{felsenstein2004inferring}
 Felsenstein, J., Felenstein, J.: Inferring phylogenies, vol.~2. Sinauer
   associates Sunderland, MA (2004)
+
+\bibitem{goldberg1991comparative}
+Goldberg, D.E., Deb, K.: A comparative analysis of selection schemes used in
+  genetic algorithms. In: Foundations of genetic algorithms, vol.~1, pp.
+  69--93. Elsevier (1991)
 
 \bibitem{gueguen2013bpp}
 Gu{\'e}guen, L., Gaillard, S., Boussau, B., Gouy, M., Groussin, M., Rochette,
