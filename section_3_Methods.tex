@@ -73,10 +73,19 @@ To maintain diversity of population, we always arbitrarily choose one from multi
 \end{algorithm}
 
 \subsection{Crossover}\label{subsec:crossver}
-We use Prune-Delete-Graft (PDG)~\cite{villalobos2018memetic} as the crossover operator which generates one tree (i.e., offspring) from two parents. At first, It takes a random sub-tree fromone of the parents. Then it inserts the selected sub-tree in the other parent at arandomly selected insertion point. Finally it deletes duplicated speciesfrom the second tree and returns it as the output.
+We use Prune-Delete-Graft (PDG)~\cite{villalobos2018memetic} as the crossover operator which generates one tree (i.e., offspring) from two parents. At first, It takes a random sub-tree from
+one of the parents. Then it inserts the selected sub-tree in the other parent at a
+randomly selected insertion point. Finally it deletes duplicated species
+from the second tree and returns it as the output.
 
 \subsection{Mutation} \label{subsec:mutation}
-Our mutation operator applies one of the three widely used tree rearrangement strategies~\cite{felsenstein2004inferring}: (i) Nearest NeighbourInterchange (NNI), (ii) Sub-tree Pruning and Re-grafting(SPR) and (iii) Tree Bisection and Reconnection (TBR). Each of them is selected randomly with equal probability. NNIexchanges sub-trees from an arbitrary internal branch to obtaina new tree. SPR picks a random sub-tree from a tree, removes it and then re-grafts it in a randomposition to generate a new tree. TBR combines bothSPR and NNI.
+Our mutation operator applies one of the three widely used tree rearrangement strategies~\cite{felsenstein2004inferring}: (i) Nearest Neighbour
+Interchange (NNI), (ii) Sub-tree Pruning and Re-grafting
+(SPR) and (iii) Tree Bisection and Reconnection (TBR). Each of them is selected randomly with equal probability. NNI
+exchanges sub-trees from an arbitrary internal branch to obtain
+a new tree. SPR picks a random sub-tree from a tree, removes it and then re-grafts it in a random
+position to generate a new tree. TBR combines both
+SPR and NNI.
 
 \subsection{Solution Initialization}\label{subsec:init}
 We utilize the given set of gene trees initializing the population. We randomly pair two gene trees and apply our crossover operator on them to generate an initial solution
