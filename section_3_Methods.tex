@@ -1,28 +1,28 @@
 \section{Methodology}
 \label{sec:method}
-In this paper, we adapt NSGAII for species tree estimation by integrating problem-specific encoding, initialization, crossover and mutation. Moreover, we design a special purpose EMO algorithm by modifying NSGAII considering the issues mentioned in Section~\ref{sec:problem}. In this section, we discuss the design of our modified EMO algorithm along with its different components. In what follows, the following definition will be useful. %associated with the problem 
+In this paper, we adapt NSGAII for species tree estimation by integrating problem-specific encoding, initialization, crossover and mutation. Moreover, we design a special purpose EMO algorithm by modifying NSGAII considering the issues mentioned in Section~\ref{sec:problem}. In this section, we discuss the design of our modified EMO algorithm (pseudo-code shown in Algorithm~\ref{alg:nossga}) along with its different components. In what follows, the following definition will be useful. %associated with the problem 
 
 \begin{definition}\label{def:domination_threshold}
 	\small
-	We call the worst value along a particular objective in the obtained PF of a certain generation as the \textbf{domination threshold} for that objective at that generation.
+	We call the worst value of a particular objective in the obtained PF of a certain generation as the \textbf{domination threshold} for that objective at that generation.
 \end{definition}
 
 \subsection{Algorithm Design}
 One idea to resolve issue~\ref{item:i1}, could be to enforce the EMO algorithm being applied to maintain a population that contains some solutions having objective values slightly below the domination threshold (Definition~\ref{def:domination_threshold}). However, any such algorithm in general would still
-continue optimizing one objective to a great extent even at the loss of some other objectives (resulting in issue~\ref{item:i1}) which may be detected through a change in sign of correlation (positive to negative or vice versa)  between a pair of objectives as the generation changes (discussed later in Section~\ref{}). 
-Therefore, we modify NSGAII in a way that tackles issue~\ref{item:i1} more elegantly in addition to resolving issue~\ref{item:i2}.  
-
-
+continue optimizing one objective to a great extent even at the loss of some other objectives (resulting in issue~\ref{item:i1}) which may be detected through a change in sign of correlation (positive to negative or vice versa)  between a pair of objectives as the generation changes. 
+Therefore, we modify NSGAII to tackle issue~\ref{item:i1} in a better way than the original NSGAII in addition to resolving issue~\ref{item:i2}.  
 
 \begin{equation}\label{eqn:nos}
 \small
-NOS(x) = \sum_{i=1}^{3} \frac{F_i(x)-z_i^{min}}{z_i^{max}-z_i^{min}}
+SNO(x) = \sum_{i=1}^{3} \frac{F_i(x)-z_i^{min}}{z_i^{max}-z_i^{min}}
 \end{equation}
-{\scriptsize where $z_i^{min}$ ($z_i^{max}$) is the minimum (maximum) value of $i^{th}$ objective $F_i$ observed so far during the search process}
+Here $x$ is a candidate solution and $z_i^{min}$ ($z_i^{max}$) is the minimum (maximum) value of $i^{th}$ objective $F_i$ observed so far during the search process.
 
-In an attempt to address these issues, we replace the non-dominated sorting by sorting based on the summation of normalized values all objective as defined by the $NOS()$ function in equation~\ref{eqn:nos}. That's why call the resultant algorithm as Normalized Objectives' Sum Sorting Genetic Algorithm (NOSSGA). Previously similar function was utilized in~\cite{qu2010multi}, while designing an EMO algorithm, to increase diversity and reduce computational complexity. The pseudo-code of NOSSGA in shown in Algorithm~\ref{alg:nossga}. We intensify the effect of $NOS()$ by using tournament selection~\cite{goldberg1991comparative} based on $NOS()$ instead of the default binary tournament. We expect that selection based on $NOS()$ will discard those solutions which optimized one objective heavily at the cost of degrading others. This feature can resolve issue~\ref{item:i1} at least better than NSGAII as well as address issue~\ref{item:i2} that NSGAII cannot handle. 
+To overcome issue~\ref{item:i2}, we avoid the concept of domination while selecting solutions to form the population for the next generation (line~\ref{line:next_pop1}-\ref{line:next_pop2} of Algorithm~\ref{alg:nossga}). Instead, we sort solutions (line~\ref{line:sort_nos} of Algorithm~\ref{alg:nossga}) based on the summation of normalized objective (SNO) values as defined by the $SNO()$ function in equation~\ref{eqn:nos}. That's why call the modified algorithm as Summation of Normalized Objectives based Genetic Algorithm (SNOGA). We are inspired by~\cite{qu2010multi} that utilized similar strategy while designing an EMO algorithm. Moreover, as an attempt to address issue~\ref{item:i1}, we will not allow to arise conflict (negative correlation) between any pair of objectives. We accomplish this by emphasizing on $NOS()$ by using the tournament selection~\cite{goldberg1991comparative} based on $NOS()$ (line~\ref{line:tournament_nos}) while forming the offspring population.
+%instead of the default binary tournament. 
+Because we expect that selection pressure based on $NOS()$ will prefer those solutions that achieve reasonably well values across all objective than those solutions which are optimized along one objective heavily at the cost of deteriorating other objectives. This feature might help us to resolve or at least lessen issue~\ref{item:i1} compared to the original NSGAII (supported by results presented in Section~\ref{sec:experiment}). %at least better than NSGAII. %as well as address issue~\ref{item:i2} that NSGAII cannot handle. 
 
-To maintain diversity of population, we always arbitrarily choose one from multiple solutions having the same $NOS()$ value (line \ref{line:diversity}). Like NSGAII, NOSSGA is a highly exploitative algorithm. To increase the exploration capability, we use crowding distance concept of NSGAII, albeit in a different way than NSGAII, to pick some least crowded solutions among the solutions with lower $NOS()$ values  (line~\ref{line:crowding_s}-\ref{line:crowding_e}). While generating offspring, we keep random selection in line~\ref{line:random_selection} to ensure the participation of such solutions. We expect that this feature will help to escape local optima.
+Additionally, we always arbitrarily choose one from multiple solutions having the same $NOS()$ value (line \ref{line:diversity}) to maintain the diversity of solutions. Also, we preserve diversity by using the crowding distance concept of NSGAII, albeit in a different way than NSGAII, to keep some less crowded but poor (having lower $NOS()$ values) solutions (line~\ref{line:crowding_s}-\ref{line:crowding_e}) in the population. However, unlike NSGAII, we keep the random selection in line~\ref{line:random_selection}. This increases the exploration capability of NOSSGA by ensuring the participation of a few poor solutions in the offspring generating process. We expect this feature to aid in escaping local optima.
 
 
 %It optimizes three objectives, with certain attentions to the nature of the problem, and generates a tree-space that contains high quality species trees. 
@@ -30,69 +30,64 @@ To maintain diversity of population, we always arbitrarily choose one from multi
 
 \begin{algorithm}[!htbp]
 	\scriptsize
-	\caption{NOSSGA}
-	\textbf{Input:} $m_g$ (max. generations), $p_s$ (population size), $c_r$ (crossover rate), $m_r$ (mutation rate), $t_s$ (Tournament size)\\
-	\textbf{Output:} $P$ (A vector of $N$ species trees)
+	\caption{SNOGA}
+	\textbf{Input:} $m_g$ (max. generations), $p_s$ (population size), $c_r$ (crossover rate), $m_r$ (mutation rate), $t_s$ (tournament size)\\
+	\textbf{Output:} $P$ (A list of $p_s$ candidate solutions i.e., species trees)
 	\begin{algorithmic}[1]\label{alg:nossga}
-		\STATE{Initialize $P$ with $N$ randomly generated solutions (i.e., species trees) } \COMMENT{sec.~\ref{subsec:init}}
-		\STATE{For each solution in $ P $, evaluate the objective functions and $NOS()$} \COMMENT{using eqn.\ref{eqn:nos}}
-		%\STATE{For each solution $x$ in $ P $, calculate NOS($x$)}
+		\STATE{$P \gets$ population\_initialization($N$)} \COMMENT{sec.~\ref{subsec:init}}
+		\STATE{For each solution in $ P $, evaluate the objective functions and $SNO()$ function} \COMMENT{using eqn.\ref{eqn:nos}}
+		%\STATE{For each solution $x$ in $ P $, calculate SNO($x$)}
 		\STATE{$g \gets 0$} \COMMENT{generation counter}
 		\WHILE{ $g < m_g$}
-			\STATE{$Q \gets \emptyset$} \COMMENT{offspring population, an empty vector that can hold $N$ solutions}
-			\FOR{$i \leftarrow 1$ to $p_s$}	%\label{mainLoop}	
-				\STATE{$S_1 \gets$ tournament\_selection($P$, $t_s$)} \COMMENT{based on NOS()}
-				\STATE{$S_2 \gets$ random\_selection($P$)} \label{line:random_selection}
-				\STATE{$Q[i] \gets$ mutation(crossover($S_1, S_2, c_r$), $m_r$)} \COMMENT{sec.~\ref{subsec:crossver}, \ref{subsec:mutation}}
-				%\STATE{Generate an offspring by applying crossover on $S_1, S_2$, then mutate the offspring and append the resultant solution to $Q$}		
-			\ENDFOR	
-			\STATE{For each solution in $ Q $, evaluate the objective functions and $NOS()$ }
-			\STATE{$ R \gets P \cup Q$} \COMMENT{$R$ is a vector holding $2N$ solutions}
-			%\STATE{For each solution $x$ in $ R $, calculate NOS($x$)}
-			\STATE{Sort the members of $ R $ in ascending order of $NOS()$} \COMMENT{ascendind because all objectives are treated as minimization} \label{line:nos}
-			\STATE{$P \gets \emptyset$, Append $R[1]$ to $P$, Remove $R[1]$ from $R$}
-			%\STATE{$P[1] \gets R[1]$}
-			%\STATE{$i \gets 2$}
-			\FOR{$i \leftarrow 2$ to $p_s$}	%\label{mainLoop}	
-				\STATE{\textbf{if} $NOS$($R[1]$) $\ne$ $NOS$(Current end of $P$), \textbf{then} Append $R[1]$ to $P$ }	\label{line:diversity}
-				\STATE{Remove $R[1]$ from $R$}	\COMMENT{each element is shifted left by 1 position }
-			\ENDFOR	
-%			\FOR{$i \gets 1$ to $N$}	%\label{mainLoop}	
-%				\IF{ NOS($R[i]) \ge P[i-1]$)}
-%					\STATE{$P[i] \gets R[i]$}
-%				\ENDIF
-%				\STATE{Remove $R[i]$ from $R$}		
-%			\ENDFOR	
-			\STATE{For each remaining solution in $ R $, calculate the crowding distance}\label{line:crowding_s}
-			\STATE{Sort the members of $ R $  in descending order of the crowding distance in $R$}
-			\STATE{Fill-up the remaining solutions for $P$ from the top of $R$}\label{line:crowding_e}
-			\STATE{$g \gets g + 1$}
+		\STATE{$Q \gets \emptyset$} \COMMENT{offspring population, an empty list that can hold $p_s$ solutions}
+		\FOR{$i \leftarrow 1$ to $p_s$}    %\label{mainLoop}    
+		\STATE{$S_1 \gets$ tournament\_selection($P$, $t_s$)} \COMMENT{based on value of $SNO()$ function} \label{line:tournament_nos}
+		\STATE{$S_2 \gets$ random\_selection($P$)} \label{line:random_selection}
+		\STATE{$x \gets$ mutation(crossover($S_1, S_2, c_r$), $m_r$)}\COMMENT{sec.~\ref{subsec:crossver}, \ref{subsec:mutation}}
+		\STATE{$\!\!$Add $x$ to tail($Q$)}
+		%\STATE{Generate an offspring by applying crossover on $S_1, S_2$, then mutate the offspring and append the resultant solution to $Q$}        
+		\ENDFOR    
+		\STATE{For each solution in $ Q $, evaluate the objective functions and $SNO()$ function }
+		\STATE{$ R \gets P \cup Q$} \COMMENT{$R$ is a list holding $2p_s$ solutions}
+		%\STATE{For each solution $x$ in $ R $, calculate SNO($x$)}
+		\STATE{Sort the members of $ R $ in ascending order of $SNO()$ values} \COMMENT{ascending because all objectives are treated as minimization}\label{line:sort_nos} \label{line:nos}
+		\STATE{$P \gets \emptyset$, Remove the solution at head($R$) and add it to tail($P$)} \label{line:next_pop1}
+		%\STATE{$P[1] \gets R[1]$}
+		%\STATE{$i \gets 2$}
+		\FOR{$i \leftarrow 2$ to $p_s$}    %\label{mainLoop}  
+		\STATE{Remove the solution at head($R$) and store it in $x$}    %\COMMENT{each element is shifted left by 1 position }   
+		\STATE{\textbf{if} $SNO$($x$) $\ne$ $SNO$(solution at tail($P$)), \textbf{then} Add $x$ to tail($P$) }    \label{line:diversity}
+
+		\ENDFOR    \label{line:next_pop2}
+		%            \FOR{$i \gets 1$ to $N$}    %\label{mainLoop}    
+		%                \IF{ SNO($R[i]) \ge P[i-1]$)}
+		%                    \STATE{$P[i] \gets R[i]$}
+		%                \ENDIF
+		%                \STATE{Remove $R[i]$ from $R$}        
+		%            \ENDFOR    
+		%\STATE{For each remaining solution in $ R $, calculate the crowding distance}\label{line:crowding_s}
+		\STATE{Sort the members of $ R $  in descending order of their crowding distance~\cite{deb2002fast} in $R$}
+		\STATE{Fill-up the remaining solutions for $P$ from the top of $R$}\label{line:crowding_e}
+		\STATE{$g \gets g + 1$}
 		\ENDWHILE
 		\STATE{\textbf{return} $P$}
 	\end{algorithmic}
 \end{algorithm}
 
 \subsection{Crossover}\label{subsec:crossver}
-We use Prune-Delete-Graft (PDG)~\cite{villalobos2018memetic} as the crossover operator which generates one tree (i.e., offspring) from two parents. At first, It takes a random sub-tree from
-one of the parents. Then it inserts the selected sub-tree in the other parent at a
-randomly selected insertion point. Finally it deletes duplicated species
-from the second tree and returns it as the output.
+We use Prune-Delete-Graft (PDG)~\cite{villalobos2018memetic} as the crossover operator which generates one tree (i.e., offspring) from two parents. At first, It takes a random sub-tree from one of the parents. Then it inserts the selected sub-tree in the other parent at a
+randomly selected insertion point. Finally, it deletes duplicated species from the second tree and returns it as the output.
 
 \subsection{Mutation} \label{subsec:mutation}
 Our mutation operator applies one of the three widely used tree rearrangement strategies~\cite{felsenstein2004inferring}: (i) Nearest Neighbour
-Interchange (NNI), (ii) Sub-tree Pruning and Re-grafting
-(SPR) and (iii) Tree Bisection and Reconnection (TBR). Each of them is selected randomly with equal probability. NNI
-exchanges sub-trees from an arbitrary internal branch to obtain
-a new tree. SPR picks a random sub-tree from a tree, removes it and then re-grafts it in a random
-position to generate a new tree. TBR combines both
-SPR and NNI.
+Interchange (NNI), (ii) Sub-tree Pruning and Re-grafting (SPR) and (iii) Tree Bisection and Reconnection (TBR). Each of them is selected randomly with equal probability. NNI exchanges sub-trees from an arbitrary internal branch to obtain a new tree. On the other hand, SPR picks a random sub-tree from a tree, removes it and then re-grafts it in a random position to generate a new tree. And TBR is a combination of SPR and NNI.
 
-\subsection{Solution Initialization}\label{subsec:init}
-We utilize the given set of gene trees initializing the population. We randomly pair two gene trees and apply our crossover operator on them to generate an initial solution
+\subsection{Population Initialization}\label{subsec:init}
+We generate the required number of solutions for the initial population by utilizing the given set of gene trees. To produce a single solution, we randomly pair two gene trees and apply our crossover operator on them with probability 1.0. 
 
 
 \subsection{Implementation Notes}
-We encode species tree using \textit{TreeTemplate} class provided by BIO++~\cite{gueguen2013bpp} which is a collection of C++ libraries for Bioinformatics. We implemented both NSGAII and NOSSGA using jMetalCpp\footnote{\url{https://github.com/jMetal/jMetalCpp}} which is a C++ framework for EMO. We use the implementation of PDG, NNI, SPR and TBR from~\cite{zambrano2016mo} after fixing some bugs. We evaluate each objective (QT/TP/PL) using a feature provided by each method (ASTRAL/STELAR/MP-EST) to score an existing species tree. Thus for each candidate solution, we invoke the executable of a particular method to evaluate an objective.
+We encode species tree using \textit{TreeTemplate} class provided by BIO++~\cite{gueguen2013bpp} which is a collection of C++ libraries for Bioinformatics. To implement NSGAII and NOSSGA, we use a C++ framework for EMO, jMetalCpp\footnote{\url{https://github.com/jMetal/jMetalCpp}}. We reuse the implementation of PDG, NNI, SPR and TBR from~\cite{zambrano2016mo} after fixing some bugs. Furthermore, we evaluate each objective (QT/TP/PL) using a feature provided by each method (ASTRAL/STELAR/MP-EST) to score an existing species tree. Thus for each candidate solution, we invoke the executable of a particular method to evaluate an objective.
 
 \begin{comment}
 \subsection{Objective Evaluation}
