@@ -122,6 +122,11 @@ Liu, L., Yu, L., Pearl, D.K., Edwards, S.V.: Estimating species phylogenies
   using coalescence times among sequences. Systematic biology  \textbf{58}(5),
   468--477 (2009)
 
+\bibitem{lopez2013jmetalcpp}
+L{\'o}pez-Camacho, E., Garc{\'\i}a~Godoy, M.J., Nebro, A.J., Aldana-Montes,
+  J.F.: jmetalcpp: optimizing molecular docking problems with a c++
+  metaheuristic framework. Bioinformatics  \textbf{30}(3),  437--438 (2013)
+
 \bibitem{maddison1997gene}
 Maddison, W.P.: Gene trees in species trees. Systematic biology
   \textbf{46}(3),  523--536 (1997)

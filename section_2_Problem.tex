@@ -9,7 +9,7 @@ We are given a set of $M$ rooted binary trees as a collection gene trees each ha
 	\item Maximize PL 
 	\subitem {\scriptsize PL: pseudo-likelihood estimation of the species tree utilizing the underlying triplet distribution of the gene trees (used by MP-EST~\cite{mpest})}
 \end{enumerate}
-\textbf{In subsequent sections, we treat each objective as a minimization\footnote{In EMO literature and frameworks, objectives are traditionally assumed as minimization}}. Unlike traditional multi-objective optimization problems (MOPs), here our goal is not only to effectively sampling the Pareto front (PF) because of the following issues:
+ \textbf{To remain in line with the EMO literature and software frameworks, in what follows we have treated each objective as a minimization criterion}. Unlike traditional multi-objective optimization problems (MOPs), here our goal is not only to effectively sampling the Pareto front (PF) because of the following two issues:
 \begin{enumerate}[label=$I_\arabic*$]
 	\item \label{item:i1} Optimizing an objective beyond a certain limit can lead the resultant species tree deviate from the true tree (please see Section~\ref{subsec:observation})
 	%\item 
