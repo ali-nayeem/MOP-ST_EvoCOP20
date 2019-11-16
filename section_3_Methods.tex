@@ -8,8 +8,7 @@ In this paper, we adapt NSGAII for species tree estimation by integrating proble
 \end{definition}
 
 \subsection{Algorithm Design}
-One idea to resolve issue~\ref{item:i1}, could be to enforce the EMO algorithm being applied to maintain a population that contains some solutions having objective values slightly below the domination threshold (Definition~\ref{def:domination_threshold}). However, any such algorithm in general would still
-continue optimizing one objective to a great extent even at the loss of some other objectives (resulting in issue~\ref{item:i1}) which may be detected through a change in sign of correlation coefficient (positive to negative)  between a pair of objectives as the generation changes. 
+One idea to resolve issue~\ref{item:i1}, could be to enforce the EMO algorithm being applied to maintain a population that contains some solutions having objective values slightly below the domination threshold (Definition~\ref{def:domination_threshold}). However, any such algorithm, in general, would continue optimizing one objective to a great extent even at the loss of some other objectives (resulting in issue~\ref{item:i1}) which may be detected through a change in sign of correlation coefficient (positive to negative)  between a pair of objectives as the generation changes. 
 Therefore, we modify NSGAII to tackle issue~\ref{item:i1} in a better way than the original NSGAII in addition to resolving issue~\ref{item:i2}.  
 
 \begin{equation}\label{eqn:nos}
@@ -18,14 +17,14 @@ SNO(x) = \sum_{i=1}^{3} \frac{F_i(x)-z_i^{min}}{z_i^{max}-z_i^{min}}
 \end{equation}
 Here $x$ is a candidate solution (i.e., species tree) and $z_i^{min}$ ($z_i^{max}$) is the minimum (maximum) value of $i^{th}$ objective $F_i$ observed so far during the search process.
 
-To overcome issue~\ref{item:i2}, we avoid the concept of non-domination while selecting solutions to form the population for the next generation (line~\ref{line:next_pop1}-\ref{line:next_pop2} of Algorithm~\ref{alg:nossga}). Instead, we sort solutions (line~\ref{line:sort_nos} of Algorithm~\ref{alg:nossga}) based on the summation of normalized objective (SNO) values as defined by the $SNO()$ function in Equation~\ref{eqn:nos}. That is why we call the modified algorithm as Summation of Normalized Objectives based Genetic Algorithm (SNOGA). We are inspired by~\cite{qu2010multi} where  similar strategy was utilized to design an EMO algorithm. Moreover, as an attempt to address issue~\ref{item:i1}, we will not allow to arise conflict (negative correlation) between any pair of objectives. We accomplish this by emphasizing on $SNO()$ by using the tournament selection~\cite{goldberg1991comparative} based on $SNO()$ (line~\ref{line:tournament_nos}) while forming the offspring population.
+To overcome issue~\ref{item:i2}, we avoid the concept of non-domination while selecting solutions to form the population for the next generation (line~\ref{line:next_pop1}-\ref{line:next_pop2} of Algorithm~\ref{alg:nossga}). Instead, we sort solutions (line~\ref{line:sort_nos} of Algorithm~\ref{alg:nossga}) based on the summation of normalized objective (SNO) values as defined by the $SNO()$ function in Equation~\ref{eqn:nos}. That is why, we refer to our algorithm as SNOGA, i.e, Summation of Normalized Objectives based Genetic Algorithm. We are inspired by~\cite{qu2010multi} where a similar strategy was utilized to design an EMO algorithm. Moreover, as an attempt to address issue~\ref{item:i1}, we will not allow the selection of individuals that may arise conflict (negative correlation coefficient) between any pair of objectives. We accomplish this by emphasizing on $SNO()$ by using the tournament selection~\cite{goldberg1991comparative} based on $SNO()$ (line~\ref{line:tournament_nos}) while forming the offspring population.
 %instead of the default binary tournament. 
-Because we expect that selection pressure based on $SNO()$ will prefer those solutions that achieve reasonably well values across all objective than those solutions which are optimized along one objective heavily at the cost of deteriorating other objectives. This feature might help us to resolve or at least lessen issue~\ref{item:i1} compared to the original NSGAII (supported by results presented in Section~\ref{sec:experiment}). %at least better than NSGAII. %as well as address issue~\ref{item:i2} that NSGAII cannot handle. 
+Because we expect that selection pressure based on $SNO()$ will prefer those solutions that achieve reasonably well values across all objective than those solutions which are optimized along one objective heavily at the cost of other objectives. This feature might help us to resolve or at least lessen issue~\ref{item:i1} compared to the original NSGAII algorithm (supported by results presented in Section~\ref{sec:experiment}). %at least better than NSGAII. %as well as address issue~\ref{item:i2} that NSGAII cannot handle. 
 
-Additionally, we always arbitrarily choose one from multiple solutions having the same $SNO()$ value (line \ref{line:diversity}) to maintain the diversity of solutions. Also, we preserve diversity by using the crowding distance concept of NSGAII, albeit in a different way than NSGAII, to keep some less crowded but poor (having lower $SNO()$ values) solutions (line~\ref{line:crowding_s}-\ref{line:crowding_e}) in the population. However, unlike NSGAII, we keep the random selection in line~\ref{line:random_selection}. This increases the exploration capability of SNOGA by ensuring the participation of a few poor solutions in the offspring generating process. We expect this feature to aid in escaping local optima.
+Additionally, we always randomly choose one from among multiple solutions having the same $SNO()$ value (line \ref{line:diversity}) to help maintain the diversity of solutions. Also, we attempt to preserve diversity by using the crowding distance concept of NSGAII, albeit in a different way than NSGAII, by keeping some sparsely spaced (in the objective space) solutions having poor $SNO()$ values (line~\ref{line:crowding_s}-\ref{line:crowding_e}) in the population. In addition to doing tournament selection (as mentioned above), unlike NSGAII, we also use the random selection (line~\ref{line:random_selection}) to ensuring the participation of a few poor solutions (in terms of $SNO()$) in the offspring generating process. This increases the exploration capability of SNOGA to help escape local optima. Moreover, we expect this feature to aid in addressing issue~\ref{item:i2} as well.
 
 
-%It optimizes three objectives, with certain attentions to the nature of the problem, and generates a tree-space that contains high quality species trees. 
+%It optimizes three objectives, with certain attention to the nature of the problem, and generates a tree-space that contains high-quality species trees. 
 %We also apply NSGAII, using the same crossover, mutation and initialization method as the SNOGA, to approximate the PF by optimizing the three objectives. 
 
 \begin{algorithm}[!htbp]
@@ -57,7 +56,7 @@ Additionally, we always arbitrarily choose one from multiple solutions having th
 		\FOR{$i \leftarrow 2$ to $p_s$}    %\label{mainLoop}  
 		\STATE{Remove the solution from head($R$) and store it in $x$}    %\COMMENT{each element is shifted left by 1 position }   
 		\STATE{\textbf{if} $SNO$($x$) $\ne$ $SNO$(solution at tail($P$)), \textbf{then} Add $x$ to tail($P$) }    \label{line:diversity}
-
+		
 		\ENDFOR    \label{line:next_pop2}
 		%            \FOR{$i \gets 1$ to $N$}    %\label{mainLoop}    
 		%                \IF{ SNO($R[i]) \ge P[i-1]$)}
@@ -87,11 +86,11 @@ We generate the required number of solutions for the initial population by utili
 
 
 \subsection{Implementation Notes}
-We encode species tree using \textit{TreeTemplate} class provided by BIO++~\cite{gueguen2013bpp} which is a collection of C++ libraries for Bioinformatics. To implement NSGAII and SNOGA, we use a C++ framework for EMO, jMetalCpp~\cite{lopez2013jmetalcpp}. We reuse the implementation of PDG, NNI, SPR and TBR from~\cite{zambrano2016mo} after fixing some bugs. Furthermore, we evaluate each objective (QT/TP/PL) using a feature provided by each method (ASTRAL/STELAR/MP-EST) to score an existing species tree. Thus for each candidate solution, we invoke the executable of a particular method to evaluate an objective.
+We encode species tree using \textit{TreeTemplate} class provided by BIO++~\cite{gueguen2013bpp} which is a collection of C++ libraries for Bioinformatics. To implement NSGAII and SNOGA, we use a C++ framework for EMO, jMetalCpp~\cite{lopez2013jmetalcpp}. We reuse the implementation of PDG, NNI, SPR and TBR from~\cite{zambrano2016mo} after fixing some minor bugs therein. Furthermore, we evaluate each objective (QT/TP/PL) using a feature provided by each method (ASTRAL/STELAR/MP-EST) to score an existing species tree. Thus for each candidate solution, we invoke the executable of a particular method to evaluate an objective.
 %\footnote{\url{https://github.com/jMetal/jMetalCpp}}
 \begin{comment}
 \subsection{Objective Evaluation}
-Each method (ASTRAL, STELAR or MP-EST) provides an option to score an existing species tree. We used this feature enable to evaluate the objectives. Thus for each candidate species tree, we invoke the executable of a particular method (ASTRAL/STELAR/MP-EST) to evaluate an objective . %We converted each objective into minimization to conform 
+Each method (ASTRAL, STELAR or MP-EST) provides an option to score an existing species tree. We used this feature to enable to evaluate the objectives. Thus for each candidate species tree, we invoke the executable of a particular method (ASTRAL/STELAR/MP-EST) to evaluate an objective. %We converted each objective into minimization to conform 
 %We evaluated each objective by executing the method that 
 %: invoke java executable
 %MP-EST: Maximize branch length, c++ executable
